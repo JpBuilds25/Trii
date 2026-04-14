@@ -18,6 +18,7 @@
     /* ============================================
        NOVA ATELIER - Luxury Tech Stylesheet
        Zero Dependencies | Mobile-First | CSS Grid/Flexbox
+       Performance Optimized - Reduced Animation Load
        ============================================ */
 
     /* ----- CSS Custom Properties (Design Tokens) ----- */
@@ -36,10 +37,10 @@
       --white-muted: rgba(255, 255, 255, 0.7);
       --white-faint: rgba(255, 255, 255, 0.08);
       
-      /* Glassmorphism */
-      --glass-bg: rgba(26, 31, 60, 0.25);
-      --glass-border: rgba(212, 175, 55, 0.15);
-      --glass-blur: blur(12px) saturate(180%);
+      /* Glassmorphism - Reduced blur for performance */
+      --glass-bg: rgba(26, 31, 60, 0.3);
+      --glass-border: rgba(212, 175, 55, 0.12);
+      --glass-blur: blur(8px);
       
       /* Shadows for 3D Depth */
       --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -69,9 +70,9 @@
       
       /* Animation Timing */
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --duration-fast: 200ms;
-      --duration-base: 400ms;
-      --duration-slow: 800ms;
+      --duration-fast: 150ms;
+      --duration-base: 300ms;
+      --duration-slow: 600ms;
     }
 
     /* ----- Reset & Base Styles ----- */
@@ -100,29 +101,29 @@
       overflow-x: hidden;
     }
 
-    /* ----- Organic Mesh Gradient Background ----- */
+    /* ----- Organic Mesh Gradient Background - Optimized ----- */
     .mesh-gradient {
       position: fixed;
       inset: 0;
       z-index: -2;
       background: 
-        radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 35%),
-        radial-gradient(circle at 85% 70%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 40% 80%, rgba(26, 31, 60, 0.9) 0%, transparent 50%),
+        radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 45%),
         linear-gradient(135deg, var(--navy-deep) 0%, #101428 100%);
       pointer-events: none;
+      will-change: auto;
     }
 
-    /* ----- Interlocking Ribbon Shapes (Organic Decor) ----- */
+    /* ----- Interlocking Ribbon Shapes - Reduced ----- */
     .ribbon-shape {
       position: fixed;
       z-index: -1;
       pointer-events: none;
-      border: 1px solid rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.05);
       border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
-      background: linear-gradient(145deg, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
       box-shadow: var(--shadow-md);
-      animation: ribbonFloat 20s infinite alternate ease-in-out;
+      will-change: transform;
     }
 
     .ribbon-1 {
@@ -133,7 +134,6 @@
       top: -10vh;
       right: -15vw;
       transform: rotate(25deg);
-      animation-duration: 25s;
     }
 
     .ribbon-2 {
@@ -144,40 +144,21 @@
       bottom: -5vh;
       left: -10vw;
       transform: rotate(-15deg);
-      animation-duration: 30s;
-      animation-direction: alternate-reverse;
       border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
     }
 
-    .ribbon-3 {
-      width: 35vw;
-      height: 35vw;
-      max-width: 500px;
-      max-height: 500px;
-      top: 50%;
-      left: 70%;
-      transform: rotate(45deg);
-      animation-duration: 22s;
-      background: linear-gradient(225deg, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
+    /* Reduced motion: no continuous animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .ribbon-shape {
+        animation: ribbonFloat 30s infinite alternate ease-in-out;
+      }
+      .ribbon-1 { animation-duration: 35s; }
+      .ribbon-2 { animation-duration: 40s; animation-direction: alternate-reverse; }
     }
 
     @keyframes ribbonFloat {
-      0% {
-        transform: rotate(25deg) translate(0, 0) scale(1);
-        border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
-      }
-      33% {
-        transform: rotate(30deg) translate(-2%, 1%) scale(1.02);
-        border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
-      }
-      66% {
-        transform: rotate(20deg) translate(2%, -1%) scale(0.98);
-        border-radius: 35% 65% 60% 40% / 60% 40% 55% 45%;
-      }
-      100% {
-        transform: rotate(28deg) translate(1%, 2%) scale(1.01);
-        border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%;
-      }
+      0% { transform: rotate(25deg) translate(0, 0) scale(1); }
+      100% { transform: rotate(30deg) translate(-1%, 1%) scale(1.01); }
     }
 
     /* ----- Accessibility Skip Link ----- */
@@ -191,7 +172,7 @@
       text-decoration: none;
       font-weight: 500;
       z-index: 1000;
-      transition: top var(--duration-fast) var(--ease-out-expo);
+      transition: top var(--duration-fast);
     }
 
     .skip-link:focus {
@@ -232,7 +213,7 @@
       align-items: baseline;
       gap: 4px;
       cursor: default;
-      transition: transform var(--duration-fast) var(--ease-out-expo);
+      transition: transform var(--duration-fast);
     }
 
     .logo-icon {
@@ -310,7 +291,7 @@
       color: var(--champagne-gold);
       overflow: hidden;
       white-space: nowrap;
-      transition: width var(--duration-base) var(--ease-out-expo);
+      transition: width var(--duration-base);
       width: 0;
     }
 
@@ -328,7 +309,7 @@
       background: var(--champagne-gold);
       transform: scaleX(0);
       transform-origin: right;
-      transition: transform var(--duration-base) var(--ease-out-expo);
+      transition: transform var(--duration-base);
       box-shadow: 0 0 8px var(--champagne-gold);
     }
 
@@ -339,7 +320,7 @@
 
     /* Magnetic Hover Effect Base */
     .magnetic-hover {
-      transition: transform var(--duration-fast) var(--ease-out-expo);
+      transition: transform var(--duration-fast);
     }
 
     /* Mobile Toggle */
@@ -360,7 +341,7 @@
       width: 100%;
       height: 1.5px;
       background: var(--champagne-gold);
-      transition: all var(--duration-base) var(--ease-out-expo);
+      transition: all var(--duration-base);
       box-shadow: 0 0 8px var(--champagne-gold);
     }
 
@@ -469,7 +450,7 @@
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 60px;
-      transition: all var(--duration-base) var(--ease-out-expo);
+      transition: all var(--duration-base);
       position: relative;
       overflow: hidden;
       background: transparent;
@@ -522,7 +503,7 @@
       width: 100%;
     }
 
-    /* Home Visual - Geometric Display */
+    /* Home Visual - Geometric Display - Optimized */
     .home-visual {
       position: relative;
       height: 500px;
@@ -536,12 +517,21 @@
 
     .geo-shape {
       position: absolute;
-      border: 2px solid rgba(212, 175, 55, 0.15);
+      border: 2px solid rgba(212, 175, 55, 0.12);
       border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
       box-shadow: var(--shadow-gold);
       backdrop-filter: blur(4px);
-      background: rgba(26, 31, 60, 0.2);
-      animation: geoFloat 12s infinite alternate ease-in-out;
+      background: rgba(26, 31, 60, 0.15);
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .geo-shape {
+        animation: geoFloat 20s infinite alternate ease-in-out;
+      }
+      .geo-1 { animation-duration: 25s; }
+      .geo-2 { animation-duration: 30s; animation-direction: alternate-reverse; }
+      .geo-3 { animation-duration: 18s; }
     }
 
     .geo-1 {
@@ -550,8 +540,7 @@
       top: 10%;
       right: 5%;
       border-color: var(--champagne-gold);
-      opacity: 0.6;
-      animation-duration: 15s;
+      opacity: 0.5;
     }
 
     .geo-2 {
@@ -560,9 +549,7 @@
       bottom: 15%;
       left: 5%;
       border-color: var(--white-muted);
-      opacity: 0.3;
-      animation-duration: 18s;
-      animation-direction: alternate-reverse;
+      opacity: 0.25;
     }
 
     .geo-3 {
@@ -571,8 +558,7 @@
       top: 50%;
       left: 40%;
       border-color: var(--champagne-gold);
-      opacity: 0.4;
-      animation-duration: 10s;
+      opacity: 0.35;
     }
 
     .geo-glow {
@@ -582,20 +568,14 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
 
     @keyframes geoFloat {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-        border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
-      }
-      100% {
-        transform: translate(-20px, 15px) rotate(10deg);
-        border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-      }
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-15px, 10px) rotate(8deg); }
     }
 
     /* Scroll Indicator */
@@ -621,7 +601,12 @@
       width: 1px;
       height: 60px;
       background: linear-gradient(to bottom, var(--champagne-gold), transparent);
-      animation: scrollPulse 2s infinite;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll-line {
+        animation: scrollPulse 2s infinite;
+      }
     }
 
     @keyframes scrollPulse {
@@ -629,189 +614,13 @@
       50% { opacity: 1; transform: scaleY(1); }
     }
 
-    /* ===== ABOUT SECTION - INTERLOCKING RIBBON SHOWCASE (REPLACED CARDS) ===== */
-    .about-showcase {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-lg);
-      margin-bottom: var(--space-xl);
+    /* ----- About Section - SIMPLE PANEL ONLY (CARDS REMOVED) ----- */
+    .about-story {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .showcase-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: var(--space-lg);
-      position: relative;
-    }
-
-    .showcase-item.reverse {
-      grid-template-columns: 1fr 120px;
-    }
-
-    .showcase-item.reverse .showcase-marker {
-      order: 2;
-      text-align: right;
-    }
-
-    .showcase-marker {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .marker-icon {
-      width: 70px;
-      height: 70px;
-      position: relative;
-    }
-
-    .interlock-pair {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .interlock-1, .interlock-2 {
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      border: 2px solid var(--champagne-gold);
-      background: rgba(212, 175, 55, 0.08);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
-      transition: all var(--duration-base) var(--ease-out-expo);
-    }
-
-    .interlock-1 {
-      top: 0;
-      left: 0;
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      animation: interlockPulse1 4s infinite alternate ease-in-out;
-    }
-
-    .interlock-2 {
-      bottom: 0;
-      right: 0;
-      border-radius: 40% 60% 70% 30% / 30% 70% 40% 60%;
-      border-color: var(--white-muted);
-      animation: interlockPulse2 4s infinite alternate ease-in-out;
-    }
-
-    @keyframes interlockPulse1 {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(-3px, 3px) rotate(5deg); }
-    }
-
-    @keyframes interlockPulse2 {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(3px, -3px) rotate(-5deg); }
-    }
-
-    .marker-label {
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--champagne-gold);
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-    }
-
-    .showcase-item.reverse .marker-label {
-      writing-mode: vertical-rl;
-      transform: rotate(0deg);
-    }
-
-    .showcase-content {
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      border-radius: 0 60px 60px 60px;
-      padding: var(--space-lg);
-      position: relative;
-      transition: all var(--duration-base) var(--ease-out-expo);
-      box-shadow: var(--shadow-md);
-    }
-
-    .showcase-item.reverse .showcase-content {
-      border-radius: 60px 0 60px 60px;
-    }
-
-    .showcase-content::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
-      border-radius: inherit;
-      pointer-events: none;
-    }
-
-    .showcase-content::after {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      width: 40px;
-      height: 40px;
-      border-top: 2px solid var(--champagne-gold);
-      border-left: 2px solid var(--champagne-gold);
-      border-radius: 0 0 20px 0;
-      opacity: 0.4;
-    }
-
-    .showcase-item.reverse .showcase-content::after {
-      left: auto;
-      right: -1px;
-      border-left: none;
-      border-right: 2px solid var(--champagne-gold);
-      border-radius: 0 0 0 20px;
-    }
-
-    .showcase-content:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 175, 55, 0.1);
-      border-color: rgba(212, 175, 55, 0.25);
-    }
-
-    .showcase-title {
-      font-size: var(--text-md);
-      font-weight: 400;
-      margin-bottom: var(--space-sm);
-      color: var(--white-soft);
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .title-accent {
-      width: 30px;
-      height: 1px;
-      background: var(--champagne-gold);
-      opacity: 0.6;
-    }
-
-    .showcase-text {
-      font-size: var(--text-sm);
-      color: var(--white-muted);
-      line-height: 1.8;
-    }
-
-    .showcase-footer {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: var(--space-md);
-    }
-
-    .footer-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--champagne-gold);
-      border-radius: 50%;
-      margin: 0 2px;
-      opacity: 0.4;
-    }
-
-    /* Glass Panel (About Story - Unchanged) */
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
@@ -821,12 +630,6 @@
       padding: var(--space-lg);
       position: relative;
       overflow: hidden;
-    }
-
-    .about-story {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
     }
 
     .story-text {
@@ -842,7 +645,7 @@
       letter-spacing: 0.2em;
     }
 
-    /* ----- Services Section (Unchanged) ----- */
+    /* ----- Services Section ----- */
     .services-showcase {
       display: flex;
       flex-direction: column;
@@ -892,7 +695,7 @@
       padding: var(--space-md) var(--space-lg);
     }
 
-    /* Glass Cards (For Services - Unchanged) */
+    /* Glass Cards */
     .glass-card {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
@@ -910,14 +713,14 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(145deg, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .glass-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 175, 55, 0.1);
-      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 175, 55, 0.08);
+      border-color: rgba(212, 175, 55, 0.25);
     }
 
     .service-title {
@@ -948,7 +751,7 @@
       color: var(--white-muted);
     }
 
-    /* ----- Contact Section (Unchanged) ----- */
+    /* ----- Contact Section ----- */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -997,8 +800,8 @@
       right: 0;
       width: 150px;
       height: 150px;
-      border-right: 1px solid rgba(212, 175, 55, 0.1);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      border-right: 1px solid rgba(212, 175, 55, 0.08);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
       border-radius: 0 0 60px 0;
       pointer-events: none;
     }
@@ -1052,7 +855,7 @@
       width: 0;
       height: 1px;
       background: var(--champagne-gold);
-      transition: width var(--duration-base) var(--ease-out-expo);
+      transition: width var(--duration-base);
       box-shadow: 0 0 10px var(--champagne-gold);
     }
 
@@ -1067,7 +870,7 @@
       margin-top: var(--space-sm);
     }
 
-    /* ----- Footer (Unchanged) ----- */
+    /* ----- Footer ----- */
     .footer {
       padding: var(--space-lg) 0;
       border-top: 1px solid var(--glass-border);
@@ -1124,7 +927,7 @@
       border-color: var(--champagne-gold);
     }
 
-    /* ----- Scroll Reveal Animations ----- */
+    /* ----- Scroll Reveal Animations - Optimized ----- */
     .reveal {
       opacity: 0;
       visibility: hidden;
@@ -1134,21 +937,10 @@
       will-change: transform, opacity;
     }
 
-    .reveal[data-reveal="up"] {
-      transform: translateY(40px);
-    }
-
-    .reveal[data-reveal="right"] {
-      transform: translateX(-40px);
-    }
-
-    .reveal[data-reveal="left"] {
-      transform: translateX(40px);
-    }
-
-    .reveal[data-reveal="fade"] {
-      transform: scale(0.95);
-    }
+    .reveal[data-reveal="up"] { transform: translateY(30px); }
+    .reveal[data-reveal="right"] { transform: translateX(-30px); }
+    .reveal[data-reveal="left"] { transform: translateX(30px); }
+    .reveal[data-reveal="fade"] { transform: scale(0.96); }
 
     .reveal.revealed {
       opacity: 1;
@@ -1157,12 +949,12 @@
     }
 
     /* Staggered Delays */
-    .reveal[data-delay="100"] { transition-delay: 100ms; }
-    .reveal[data-delay="200"] { transition-delay: 200ms; }
-    .reveal[data-delay="300"] { transition-delay: 300ms; }
-    .reveal[data-delay="400"] { transition-delay: 400ms; }
-    .reveal[data-delay="500"] { transition-delay: 500ms; }
-    .reveal[data-delay="600"] { transition-delay: 600ms; }
+    .reveal[data-delay="100"] { transition-delay: 80ms; }
+    .reveal[data-delay="200"] { transition-delay: 160ms; }
+    .reveal[data-delay="300"] { transition-delay: 240ms; }
+    .reveal[data-delay="400"] { transition-delay: 320ms; }
+    .reveal[data-delay="500"] { transition-delay: 400ms; }
+    .reveal[data-delay="600"] { transition-delay: 480ms; }
 
     /* ----- Responsive Design (Mobile-First Adjustments) ----- */
     @media (max-width: 768px) {
@@ -1182,7 +974,7 @@
         justify-content: center;
         align-items: center;
         gap: var(--space-lg);
-        transition: right var(--duration-base) var(--ease-out-expo);
+        transition: right var(--duration-base);
         border-left: 1px solid var(--glass-border);
         z-index: 100;
       }
@@ -1223,38 +1015,6 @@
       
       .home-visual {
         height: 350px;
-      }
-      
-      /* About Showcase Mobile */
-      .showcase-item,
-      .showcase-item.reverse {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
-      }
-      
-      .showcase-marker {
-        flex-direction: row;
-        justify-content: center;
-      }
-      
-      .marker-label {
-        writing-mode: horizontal-tb;
-        transform: none;
-      }
-      
-      .showcase-item.reverse .marker-label {
-        writing-mode: horizontal-tb;
-        transform: none;
-      }
-      
-      .showcase-item.reverse .showcase-marker {
-        order: -1;
-        text-align: center;
-      }
-      
-      .showcase-content,
-      .showcase-item.reverse .showcase-content {
-        border-radius: 40px;
       }
       
       .service-item,
@@ -1319,16 +1079,6 @@
         width: 100px;
         height: 100px;
       }
-      
-      .marker-icon {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .interlock-1, .interlock-2 {
-        width: 35px;
-        height: 35px;
-      }
     }
 
     /* Large Screen Optimizations */
@@ -1375,10 +1125,6 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      
-      .ribbon-shape {
-        animation: none;
-      }
     }
   </style>
 </head>
@@ -1389,7 +1135,6 @@
   <!-- Decorative Interlocking Ribbon Shapes -->
   <div class="ribbon-shape ribbon-1" aria-hidden="true"></div>
   <div class="ribbon-shape ribbon-2" aria-hidden="true"></div>
-  <div class="ribbon-shape ribbon-3" aria-hidden="true"></div>
 
   <!-- Skip Navigation for Accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -1460,7 +1205,7 @@
       </div>
     </section>
 
-    <!-- About Section - WITH INTERLOCKING RIBBON SHOWCASE (REPLACED CARDS) -->
+    <!-- About Section - SIMPLE PANEL ONLY (CARDS/SHOWCASE REMOVED) -->
     <section id="about" class="section section-about">
       <div class="container">
         <div class="section-header reveal" data-reveal="up">
@@ -1468,85 +1213,10 @@
           <h2 class="section-title">Elevating the <span class="gold">Extraordinary</span></h2>
         </div>
         
-        <!-- NEW: Interlocking Ribbon Showcase -->
-        <div class="about-showcase">
-          <div class="showcase-item reveal" data-reveal="right" data-delay="100">
-            <div class="showcase-marker">
-              <div class="marker-icon">
-                <div class="interlock-pair">
-                  <span class="interlock-1"></span>
-                  <span class="interlock-2"></span>
-                </div>
-              </div>
-              <span class="marker-label">CRAFT</span>
-            </div>
-            <div class="showcase-content">
-              <h3 class="showcase-title">
-                Bespoke Craft
-                <span class="title-accent"></span>
-              </h3>
-              <p class="showcase-text">Every pixel is intentional. We sculpt digital experiences with the precision of fine artisanship, rejecting templated mediocrity. Our work is hand-crafted, layer by layer, until perfection emerges.</p>
-              <div class="showcase-footer">
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="showcase-item reverse reveal" data-reveal="left" data-delay="200">
-            <div class="showcase-marker">
-              <div class="marker-icon">
-                <div class="interlock-pair">
-                  <span class="interlock-1"></span>
-                  <span class="interlock-2"></span>
-                </div>
-              </div>
-              <span class="marker-label">TRUST</span>
-            </div>
-            <div class="showcase-content">
-              <h3 class="showcase-title">
-                Fortified Trust
-                <span class="title-accent"></span>
-              </h3>
-              <p class="showcase-text">Security is our foundation. Zero third-party dependencies, hardened CSP policies, and an unwavering commitment to client data protection. Your digital sanctuary remains impenetrable.</p>
-              <div class="showcase-footer">
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="showcase-item reveal" data-reveal="right" data-delay="300">
-            <div class="showcase-marker">
-              <div class="marker-icon">
-                <div class="interlock-pair">
-                  <span class="interlock-1"></span>
-                  <span class="interlock-2"></span>
-                </div>
-              </div>
-              <span class="marker-label">MOTION</span>
-            </div>
-            <div class="showcase-content">
-              <h3 class="showcase-title">
-                Timeless Motion
-                <span class="title-accent"></span>
-              </h3>
-              <p class="showcase-text">Subtle, intentional animations that breathe life into interfaces without overwhelming. Elegance in every transition—where movement becomes poetry and interaction feels inevitable.</p>
-              <div class="showcase-footer">
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- About Story Panel (Unchanged) -->
-        <div class="about-story glass-panel reveal" data-reveal="fade" data-delay="400">
+        <!-- Only the story panel remains -->
+        <div class="about-story glass-panel reveal" data-reveal="fade" data-delay="200">
           <div class="story-content">
-            <p class="story-text">NOVA ATELIER emerged from a singular vision: to merge haute couture sensibilities with bulletproof engineering. We don't build websites—we craft secure, immersive sanctuaries for your brand.</p>
+            <p class="story-text">NOVA ATELIER emerged from a singular vision: to merge haute couture sensibilities with bulletproof engineering. Every pixel is intentional. Security is our foundation. We don't build websites—we craft secure, immersive sanctuaries for your brand.</p>
             <div class="story-signature">— The Atelier</div>
           </div>
         </div>
@@ -1694,7 +1364,7 @@
   <script>
     /**
      * NOVA ATELIER - Vanilla JS (Embedded)
-     * Zero Dependencies | Security-First | Intersection Observer
+     * Zero Dependencies | Security-First | Performance Optimized
      */
 
     (function() {
@@ -1704,28 +1374,13 @@
       // UTILITIES - XSS Safe DOM Manipulation
       // ============================================
       const DOM = {
-        /**
-         * Safely set text content - NEVER use innerHTML
-         */
         setText: (element, text) => {
           if (element && typeof text === 'string') {
             element.textContent = text;
           }
         },
-        
-        /**
-         * Get element by selector with safety check
-         */
-        get: (selector, context = document) => {
-          return context.querySelector(selector);
-        },
-        
-        /**
-         * Get all elements by selector
-         */
-        getAll: (selector, context = document) => {
-          return Array.from(context.querySelectorAll(selector));
-        }
+        get: (selector, context = document) => context.querySelector(selector),
+        getAll: (selector, context = document) => Array.from(context.querySelectorAll(selector))
       };
 
       // ============================================
@@ -1766,21 +1421,25 @@
       }
 
       // ============================================
-      // MAGNETIC / GLOW HOVER EFFECTS
+      // MAGNETIC / GLOW HOVER EFFECTS (THROTTLED)
       // ============================================
       function initMagneticHover() {
         const magneticElements = DOM.getAll('.magnetic-hover');
+        let rafPending = false;
         
         magneticElements.forEach(el => {
           el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+            if (rafPending) return;
+            rafPending = true;
             
-            const moveX = x * 0.08;
-            const moveY = y * 0.08;
-            
-            el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            requestAnimationFrame(() => {
+              const rect = el.getBoundingClientRect();
+              const x = e.clientX - rect.left - rect.width / 2;
+              const y = e.clientY - rect.top - rect.height / 2;
+              
+              el.style.transform = `translate(${x * 0.06}px, ${y * 0.06}px)`;
+              rafPending = false;
+            });
           });
           
           el.addEventListener('mouseleave', () => {
@@ -1804,25 +1463,23 @@
       // ============================================
       function initScrollReveal() {
         const revealElements = DOM.getAll('.reveal');
-        
         if (revealElements.length === 0) return;
         
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('revealed');
+              observer.unobserve(entry.target); // Unobserve for performance
             }
           });
-        }, {
-          threshold: 0.15,
-          rootMargin: '20px 0px -20px 0px'
-        });
+        }, { threshold: 0.1, rootMargin: '30px 0px' });
         
         revealElements.forEach(el => observer.observe(el));
         
+        // Immediately reveal elements already in view
         revealElements.forEach(el => {
           const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.85) {
+          if (rect.top < window.innerHeight * 0.9) {
             el.classList.add('revealed');
           }
         });
@@ -1832,27 +1489,17 @@
       // SMOOTH SCROLL FOR ANCHOR LINKS
       // ============================================
       function initSmoothScroll() {
-        const anchorLinks = DOM.getAll('a[href^="#"]:not([href="#"])');
-        
-        anchorLinks.forEach(anchor => {
+        DOM.getAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
           anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            const targetElement = DOM.get(href);
-            
+            const targetElement = DOM.get(this.getAttribute('href'));
             if (targetElement) {
               e.preventDefault();
-              
               const headerOffset = 80;
               const elementPosition = targetElement.getBoundingClientRect().top;
               const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
               
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-              
-              history.pushState(null, null, href);
-              
+              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              history.pushState(null, null, this.getAttribute('href'));
               targetElement.setAttribute('tabindex', '-1');
               targetElement.focus({ preventScroll: true });
             }
@@ -1865,22 +1512,15 @@
       // ============================================
       function initContactForm() {
         const form = DOM.get('#secure-contact-form');
-        
         if (!form) return;
         
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           
-          const nameInput = DOM.get('#name');
-          const emailInput = DOM.get('#email');
-          const messageInput = DOM.get('#message');
-          
           const confirmationMessage = 'Thank you for your inquiry. A member of our atelier will respond via encrypted channels within 24 hours.';
           
           const existingConfirm = DOM.get('.form-confirmation');
-          if (existingConfirm) {
-            existingConfirm.remove();
-          }
+          if (existingConfirm) existingConfirm.remove();
           
           const confirmationEl = document.createElement('div');
           confirmationEl.className = 'form-confirmation glass-card';
@@ -1889,18 +1529,15 @@
           confirmationEl.style.textAlign = 'center';
           
           DOM.setText(confirmationEl, confirmationMessage);
-          
           form.insertAdjacentElement('afterend', confirmationEl);
           
-          if (nameInput) nameInput.value = '';
-          if (emailInput) emailInput.value = '';
-          if (messageInput) messageInput.value = '';
+          // Clear form
+          ['#name', '#email', '#message'].forEach(id => {
+            const input = DOM.get(id);
+            if (input) input.value = '';
+          });
           
-          setTimeout(() => {
-            if (confirmationEl && confirmationEl.parentNode) {
-              confirmationEl.remove();
-            }
-          }, 5000);
+          setTimeout(() => confirmationEl.remove(), 5000);
         });
       }
 
@@ -1910,61 +1547,20 @@
       function initActiveNavHighlight() {
         const sections = DOM.getAll('section[id]');
         const navLinks = DOM.getAll('.nav-link');
-        
-        if (sections.length === 0 || navLinks.length === 0) return;
-        
-        const observerOptions = {
-          threshold: 0.3,
-          rootMargin: '-80px 0px -20% 0px'
-        };
+        if (sections.length === 0) return;
         
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const id = entry.target.getAttribute('id');
-              
               navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === `#${id}`) {
-                  link.style.color = 'var(--champagne-gold)';
-                } else {
-                  link.style.color = '';
-                }
+                link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--champagne-gold)' : '';
               });
             }
           });
-        }, observerOptions);
+        }, { threshold: 0.3, rootMargin: '-80px 0px -20% 0px' });
         
         sections.forEach(section => observer.observe(section));
-      }
-
-      // ============================================
-      // PARALLAX EFFECT FOR RIBBON SHAPES
-      // ============================================
-      function initParallax() {
-        const ribbons = DOM.getAll('.ribbon-shape');
-        
-        if (ribbons.length === 0) return;
-        
-        let ticking = false;
-        
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              const scrolled = window.pageYOffset;
-              
-              ribbons.forEach((ribbon, index) => {
-                const speed = 0.05 * (index + 1);
-                const yOffset = scrolled * speed;
-                ribbon.style.transform = `translateY(${yOffset}px) rotate(${25 + index * 10}deg)`;
-              });
-              
-              ticking = false;
-            });
-            
-            ticking = true;
-          }
-        }, { passive: true });
       }
 
       // ============================================
@@ -1973,8 +1569,7 @@
       function init() {
         const yearElement = DOM.get('.copyright');
         if (yearElement) {
-          const currentYear = new Date().getFullYear();
-          DOM.setText(yearElement, `© ${currentYear} NOVA ATELIER. Crafted with precision.`);
+          DOM.setText(yearElement, `© ${new Date().getFullYear()} NOVA ATELIER. Crafted with precision.`);
         }
         
         initMobileMenu();
@@ -1983,8 +1578,8 @@
         initSmoothScroll();
         initContactForm();
         initActiveNavHighlight();
-        initParallax();
         
+        // Resize handler
         let resizeTimer;
         window.addEventListener('resize', () => {
           clearTimeout(resizeTimer);
@@ -2010,8 +1605,7 @@
       } else {
         init();
       }
-
     })();
   </script>
 </body>
-  </html>
+                                                      </html>

@@ -4,33 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   
-  <!-- SECURITY: Strict Content Security Policy (CSP) -->
+  <!-- SECURITY: Strict Content Security Policy (self-contained) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   
-  <title>VANGUARD GROOMING | Heritage Barber & Gentlemen's Atelier</title>
+  <title>VANGUARD GROOMING | Gilded Age · Badass Atelier</title>
   
   <style>
-    /* ---------- RESET & SYSTEM FONTS (Zero Google Fonts) ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ---------- RESET & SYSTEM FONTS (Ultra-Premium Stacks) ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* System font stack mimicking premium editorial */
     :root {
-      --charcoal: #0c0c0c;
-      --gold: #C5A059;
-      --gold-dim: #9e7e45;
-      --cream: #F2E9D8;
-      --glass-bg: rgba(8, 8, 8, 0.7);
-      --border-light: rgba(197, 160, 89, 0.2);
-      --transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+      --charcoal: #090909;
+      --obsidian: #050505;
+      --gold-light: #D4AF37;
+      --gold-deep: #B68B24;
+      --gold-metallic: linear-gradient(135deg, #E5C158 0%, #B68B24 40%, #F3E5AB 60%, #C5A059 100%);
+      --cream: #EFE7D5;
+      --border-metallic: linear-gradient(90deg, transparent, #D4AF37, #F3E5AB, #D4AF37, transparent);
       
-      /* Font stacks: Serif for headings, Sans for body */
       --font-serif: 'Times New Roman', Times, Georgia, 'Playfair Display', serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      
+      --ease-expensive: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-door: cubic-bezier(0.6, 0.04, 0.98, 0.335);
     }
 
     body {
@@ -44,69 +41,85 @@
       min-height: 100vh;
     }
 
-    /* ---------- ENHANCED GRAIN (Pure CSS feTurbulence + Base64) ---------- */
+    /* ---------- OBSESSIVE NOISE TEXTURE (Matte Black Paper) ---------- */
     body::before {
       content: "";
       position: fixed;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
       background-repeat: repeat;
       pointer-events: none;
       z-index: 999;
-      opacity: 0.4;
+      opacity: 0.55;
       mix-blend-mode: overlay;
-      animation: grain-drift 12s infinite alternate;
     }
-    @keyframes grain-drift {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-2%, -2%); }
+    /* Additional depth grain */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(10,10,10,0.3) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 998;
     }
 
-    ::selection { background: var(--gold); color: #0a0a0a; }
+    ::selection { background: var(--gold-deep); color: #0a0a0a; }
     html { scroll-behavior: smooth; }
 
-    /* ---------- MOBILE-FIRST CLAMP TYPOGRAPHY ---------- */
-    h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); }
-    h2 { font-size: clamp(2rem, 6vw, 3.5rem); }
+    /* ---------- CLAMP EVERYWHERE (Perfect Fit on any device) ---------- */
+    h1 { font-size: clamp(3rem, 10vw, 6.5rem); line-height: 1.1; }
+    h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); }
     .serif-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: 1.5px; }
-    .gold-text { color: var(--gold); }
 
     .container {
-      max-width: 1280px;
+      max-width: 1440px;
       margin: 0 auto;
-      padding: 0 clamp(1rem, 5vw, 2.5rem);
+      padding: 0 clamp(1.2rem, 5vw, 3rem);
       position: relative;
       z-index: 5;
     }
 
-    /* ---------- GLASSMORPHISM NAVBAR (backdrop + clip-path edge) ---------- */
+    /* ---------- DYNAMIC GRID SYSTEM (1fr / minmax) ---------- */
+    .grid-dynamic {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(1.5rem, 4vw, 2.8rem);
+    }
+
+    /* ---------- GLASSMORPHISM NAVBAR (with metallic border) ---------- */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem clamp(1rem, 5vw, 2.5rem);
+      padding: clamp(1rem, 3vw, 1.8rem) clamp(1.2rem, 5vw, 3rem);
       flex-wrap: wrap;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px) saturate(200%);
-      -webkit-backdrop-filter: blur(16px) saturate(200%);
-      border-bottom: 1px solid var(--border-light);
+      background: rgba(5, 5, 5, 0.7);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border-bottom: 1px solid transparent;
+      border-image: var(--border-metallic) 1;
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .logo {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
       color: var(--cream);
       text-transform: uppercase;
     }
-    .logo span { color: var(--gold); }
+    .logo span { 
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
     .nav-links {
       display: flex;
-      gap: clamp(1rem, 4vw, 2.5rem);
+      gap: clamp(1.5rem, 4vw, 3rem);
       align-items: center;
       list-style: none;
     }
@@ -114,130 +127,169 @@
       text-decoration: none;
       color: var(--cream);
       font-weight: 400;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      transition: color 0.3s;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      letter-spacing: 2.5px;
+      transition: color 0.3s var(--ease-expensive);
       padding: 0.3rem 0;
       border-bottom: 1px solid transparent;
     }
-    .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
 
-    /* ---------- MAGNETIC BUTTON (Micro-interaction) ---------- */
-    .btn-gold, .book-btn {
-      background: transparent;
-      border: 1.5px solid var(--gold);
-      color: var(--gold);
-      padding: 0.8rem 2rem;
+    /* ---------- ULTRA-PREMIUM BOOK NOW BUTTON (Shimmer + Glint) ---------- */
+    .btn-bespoke {
+      background: rgba(10, 10, 10, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid transparent;
+      border-image: var(--border-metallic) 1;
+      color: var(--cream);
+      padding: clamp(0.7rem, 2vw, 1rem) clamp(1.8rem, 4vw, 2.5rem);
       font-family: var(--font-sans);
       font-weight: 500;
-      letter-spacing: 3px;
-      font-size: 0.8rem;
-      transition: transform 0.25s ease, background 0.4s, box-shadow 0.4s, clip-path 0.3s;
+      letter-spacing: 4px;
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      transition: transform 0.4s var(--ease-expensive), box-shadow 0.5s var(--ease-expensive), border 0.2s;
       cursor: pointer;
       display: inline-block;
-      backdrop-filter: blur(8px);
       text-decoration: none;
       text-transform: uppercase;
-      clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
       will-change: transform;
     }
-    .btn-gold:hover, .book-btn:hover {
-      background: var(--gold);
-      color: #0a0a0a;
-      border-color: var(--gold);
-      box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
-      clip-path: polygon(0% 8px, 100% 0%, 100% 100%, 8px 100%, 0% 100%);
-      transform: scale(1.02) translateY(-2px);
+    /* Shimmer animation */
+    .btn-bespoke::after {
+      content: "";
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 200%; height: 200%;
+      background: linear-gradient(115deg, transparent 20%, rgba(255, 245, 200, 0.15) 40%, transparent 60%);
+      transform: rotate(25deg);
+      animation: glint 6s infinite var(--ease-expensive);
+      pointer-events: none;
     }
-    .book-btn { padding: 0.6rem 1.8rem; }
+    @keyframes glint {
+      0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      20% { opacity: 0; }
+      100% { transform: translateX(200%) rotate(25deg); opacity: 0; }
+    }
+    .btn-bespoke:hover {
+      transform: scale(1.03) translateY(-3px);
+      box-shadow: 0 0 35px rgba(212, 175, 55, 0.25), 0 8px 20px rgba(0,0,0,0.6);
+      border-image: var(--gold-metallic) 1;
+    }
+    /* navigation version */
+    .book-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-image: var(--border-metallic) 1;
+      padding: 0.5rem 1.8rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      transition: all 0.4s var(--ease-expensive);
+      cursor: pointer;
+      color: var(--cream);
+    }
+    .book-btn:hover {
+      background: rgba(212, 175, 55, 0.05);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+      transform: scale(1.02);
+    }
 
     /* Hero */
-    .hero { text-align: center; padding: clamp(3rem, 10vh, 6rem) 1rem; }
+    .hero { 
+      text-align: center; 
+      padding: clamp(4rem, 12vh, 8rem) 1rem clamp(3rem, 8vh, 6rem); 
+    }
     .hero .est {
       font-family: var(--font-serif);
-      font-size: 1.1rem;
-      letter-spacing: 8px;
-      color: var(--gold);
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      letter-spacing: 10px;
+      color: var(--gold-light);
     }
     .gold-divider-hero {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      margin: 2rem auto;
+      gap: 25px;
+      margin: clamp(1.5rem, 4vw, 2.5rem) auto;
     }
-    .gold-divider-hero .line { width: 70px; height: 1px; background: var(--gold); }
+    .gold-divider-hero .line { 
+      width: clamp(50px, 10vw, 100px); 
+      height: 1px; 
+      background: var(--border-metallic);
+    }
 
-    /* Staggered Reveal */
+    /* Reveal + Stagger (expensive transitions) */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.2,0.9,0.3,1), transform 0.9s cubic-bezier(0.2,0.9,0.3,1);
+      transform: translateY(50px);
+      transition: opacity 0.9s var(--ease-expensive), transform 1s var(--ease-expensive);
     }
     .reveal.active { opacity: 1; transform: translateY(0); }
     .stagger-item {
       opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.15,0.85,0.3,1);
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--ease-expensive), transform 0.8s var(--ease-expensive);
     }
     .stagger-item.visible { opacity: 1; transform: translateY(0); }
 
-    /* Price list */
+    /* Price list (metallic touches) */
     .price-list {
-      background: rgba(8, 8, 8, 0.55);
-      backdrop-filter: blur(6px);
-      padding: 2.2rem 2rem;
-      border-left: 4px solid var(--gold);
+      background: rgba(5, 5, 5, 0.6);
+      backdrop-filter: blur(8px);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      border-left: 4px solid;
+      border-image: var(--gold-metallic) 1;
       margin: 2rem 0;
-      box-shadow: 0 15px 30px -10px #000;
+      box-shadow: 0 20px 30px -10px #000;
     }
     .service-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 1px dotted rgba(197, 160, 89, 0.4);
-      padding: 1.2rem 0;
-      transition: background 0.2s;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.3);
+      padding: clamp(0.9rem, 2vw, 1.3rem) 0;
     }
-    .service-name { font-size: 1.2rem; font-weight: 500; letter-spacing: 1.5px; }
-    .service-dots { flex: 1; border-bottom: 1px dotted var(--gold); margin: 0 1.5rem; height: 1em; }
-    .service-price { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--gold); }
+    .service-name { font-size: clamp(1rem, 3vw, 1.3rem); font-weight: 500; letter-spacing: 1.5px; }
+    .service-dots { flex: 1; border-bottom: 1px dotted var(--gold-deep); margin: 0 1.8rem; height: 1em; }
+    .service-price { 
+      font-family: var(--font-serif); 
+      font-size: clamp(1.3rem, 3vw, 1.8rem); 
+      font-weight: 600; 
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-    /* Gallery: NO COPYRIGHT IMAGES — pure CSS placeholders */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
+    /* Gallery — glassmorphism placeholders with metallic edge */
     .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 2px;
-      border: 1px solid rgba(197, 160, 89, 0.2);
-      transition: var(--transition);
-      background: #15110c;
+      border: 1px solid transparent;
+      border-image: var(--border-metallic) 0.5;
+      transition: all 0.6s var(--ease-expensive);
+      background: #13100b;
       aspect-ratio: 4 / 5;
-      box-shadow: 0 15px 25px -8px black;
-      cursor: default;
+      box-shadow: 0 20px 30px -12px black;
     }
-    /* Glassmorphism / Gradient Placeholder — user drops own asset later */
     .gallery-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%;
       display: block;
-      background: radial-gradient(circle at 30% 30%, #3a3024, #0d0b08);
-      filter: sepia(0.65) contrast(1.2) brightness(0.75);
-      transition: filter 0.7s ease, transform 0.8s cubic-bezier(0.2,0.9,0.4,1);
+      background: radial-gradient(circle at 25% 30%, #3d3222, #0b0907);
+      filter: sepia(0.7) contrast(1.15) brightness(0.75);
+      transition: filter 0.8s var(--ease-expensive), transform 1s var(--ease-expensive);
     }
     .gallery-item:hover .gallery-img {
-      filter: sepia(0.1) contrast(1.05) brightness(1);
-      transform: scale(1.05);
+      filter: sepia(0.1) contrast(1) brightness(1);
+      transform: scale(1.06);
     }
     .gallery-item:hover {
-      border-color: var(--gold);
-      box-shadow: 0 25px 35px -8px rgba(197, 160, 89, 0.2);
+      border-image: var(--gold-metallic) 1;
+      box-shadow: 0 30px 40px -10px rgba(212, 175, 55, 0.15);
       transform: translateY(-8px);
     }
     .gallery-item::after {
@@ -245,64 +297,67 @@
       position: absolute;
       bottom: -50px; left: 0; right: 0;
       background: rgba(5,5,5,0.8);
-      backdrop-filter: blur(8px);
-      color: var(--gold);
+      backdrop-filter: blur(12px);
+      color: var(--gold-light);
       font-size: 0.8rem;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       text-align: center;
       padding: 12px;
-      border-top: 1px solid var(--gold);
-      transition: bottom 0.4s ease;
+      border-top: 1px solid transparent;
+      border-image: var(--border-metallic) 1;
+      transition: bottom 0.45s var(--ease-expensive);
       text-transform: uppercase;
     }
     .gallery-item:hover::after { bottom: 0; }
 
-    /* Victorian SVG (inline) */
-    .victorian-scroll svg { width: 200px; max-width: 70%; fill: none; stroke: var(--gold); stroke-width: 1.5; }
-    .victorian-scroll { text-align: center; margin: 1.5rem 0; opacity: 0.7; }
+    /* Victorian SVG flourishes */
+    .victorian-scroll svg { width: clamp(160px, 30vw, 260px); fill: none; stroke: url(#goldGrad); stroke-width: 1.5; }
+    .victorian-scroll { text-align: center; margin: clamp(1rem, 3vw, 2rem) 0; }
 
     /* Footer */
     .footer {
-      background: #060606;
-      padding: 4rem 2rem 2.5rem;
+      background: #030303;
+      padding: clamp(3rem, 8vh, 5rem) 2rem 2.5rem;
       margin-top: 5rem;
-      border-top: 1px solid rgba(197,160,89,0.25);
+      border-top: 1px solid transparent;
+      border-image: var(--border-metallic) 1;
       text-align: center;
-      backdrop-filter: blur(4px);
     }
     .social-icons {
-      display: flex; justify-content: center; gap: 2.8rem; margin: 2.5rem 0;
+      display: flex; justify-content: center; gap: clamp(2rem, 6vw, 3.5rem); margin: 2.5rem 0;
     }
-    .social-icons a { color: var(--cream); transition: transform 0.3s, color 0.3s; }
-    .social-icons a:hover { color: var(--gold); transform: translateY(-3px); }
+    .social-icons a { 
+      color: var(--cream); 
+      transition: transform 0.4s var(--ease-expensive), color 0.3s; 
+    }
+    .social-icons a:hover { color: var(--gold-light); transform: translateY(-5px) scale(1.05); }
     .repeat-est {
       font-family: var(--font-serif);
-      font-size: 0.75rem;
-      letter-spacing: 5px;
-      color: rgba(242,233,216,0.3);
-      word-spacing: 10px;
+      font-size: clamp(0.6rem, 2vw, 0.8rem);
+      letter-spacing: 6px;
+      color: rgba(239, 231, 213, 0.25);
+      word-spacing: 12px;
     }
 
-    /* Responsive grid areas */
-    @media (max-width: 680px) {
+    /* Responsive & perfect-fit adjustments */
+    @media (max-width: 640px) {
       .navbar { flex-direction: column; gap: 1rem; }
       .nav-links { flex-wrap: wrap; justify-content: center; }
       .service-dots { display: none; }
       .service-item { flex-direction: column; gap: 0.2rem; }
     }
 
-    /* Accessible sr-only */
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; }
   </style>
 </head>
 <body>
 
-<!-- Frame busting / anti-clickjacking (defense) -->
+<!-- FRAME BUSTING & DEFENSE (self-executing) -->
 <script>
   if (window.top !== window.self) { window.top.location = window.self.location; }
 </script>
 
-<!-- Navigation: glassmorphism, inline SVGs only -->
+<!-- Navigation: glass, metallic border -->
 <nav class="navbar" aria-label="Main navigation">
   <div class="logo">VANGUARD<span>GROOMING</span></div>
   <ul class="nav-links" role="list">
@@ -315,32 +370,39 @@
 </nav>
 
 <main>
+  <!-- Hero Section with bespoke button -->
   <section id="home" class="hero container reveal">
     <div class="est">EST. 1892</div>
     <h1 class="serif-display">VANGUARD<br>OF REFINEMENT</h1>
     <div class="gold-divider-hero">
       <div class="line"></div>
-      <!-- Inline Diamond SVG -->
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 22,12 12,22 2,12" /></svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#goldGradHero)" stroke-width="1.5">
+        <defs><linearGradient id="goldGradHero" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="50%" stop-color="#F3E5AB"/><stop offset="100%" stop-color="#B68B24"/></linearGradient></defs>
+        <polygon points="12,2 22,12 12,22 2,12" />
+      </svg>
       <div class="line"></div>
     </div>
-    <p style="max-width: 600px; margin: 1.5rem auto; font-weight: 300;">Traditional craft. Modern edge. Where the blade meets legacy.</p>
-    <a href="#contact" class="btn-gold" id="heroBookBtn" rel="noopener">RESERVE YOUR CHAIR</a>
+    <p style="max-width: 650px; margin: 1.5rem auto; font-weight: 300; font-size: clamp(0.9rem, 3vw, 1.1rem);">Where the straight razor meets legacy. Bespoke grooming for the modern gentleman.</p>
+    <a href="#contact" class="btn-bespoke" id="heroBookBtn" rel="noopener">RESERVE YOUR CHAIR</a>
   </section>
 
-  <!-- Victorian SVG Divider -->
+  <!-- Victorian flourish with SVG gradient -->
   <div class="victorian-scroll reveal">
-    <svg viewBox="0 0 240 24"><path d="M20,12 Q35,5 50,12 T80,12 T110,12 T140,12 T170,12 T200,12 T220,12" stroke="currentColor" fill="none"/><circle cx="120" cy="12" r="3" fill="#C5A059"/></svg>
+    <svg viewBox="0 0 240 24">
+      <defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4AF37"/><stop offset="50%" stop-color="#F3E5AB"/><stop offset="100%" stop-color="#D4AF37"/></linearGradient></defs>
+      <path d="M20,12 Q35,5 50,12 T80,12 T110,12 T140,12 T170,12 T200,12 T220,12" stroke="url(#goldGrad)" fill="none"/>
+      <circle cx="120" cy="12" r="3.5" fill="#D4AF37"/>
+    </svg>
   </div>
 
-  <!-- Services (staggered micro-interactions) -->
+  <!-- Services (staggered items) -->
   <section id="services" class="container reveal">
     <div style="text-align: center;">
-      <h2 class="serif-display" style="color: var(--gold);">THE CUTTING ROOM</h2>
-      <div class="ornate-divider" style="display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0;">
-        <div class="ornate-line" style="width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold));"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)"><path d="M6 6L18 18M18 6L6 18"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg>
-        <div class="ornate-line" style="width:60px; height:1px; background:linear-gradient(90deg,var(--gold),transparent);"></div>
+      <h2 class="serif-display" style="background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent;">THE CUTTING ROOM</h2>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; margin: 1.8rem 0;">
+        <div class="ornate-line" style="width:70px; height:1px; background:var(--border-metallic);"></div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#goldGrad)"><path d="M6 6L18 18M18 6L6 18"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        <div class="ornate-line" style="width:70px; height:1px; background:var(--border-metallic);"></div>
       </div>
     </div>
     <div class="price-list">
@@ -350,42 +412,42 @@
       <div class="service-item"><span class="service-name">The Vanguard (Cut + Shave)</span><span class="service-dots"></span><span class="service-price">$135</span></div>
       <div class="service-item"><span class="service-name">Head Spa & Ritual</span><span class="service-dots"></span><span class="service-price">$160</span></div>
     </div>
-    <p style="text-align:center; margin-top:1rem;">✢ Complimentary whiskey or espresso ✢</p>
+    <p style="text-align:center; margin-top:1.5rem; letter-spacing:2px;">✢ COMPLIMENTARY WHISKEY OR ESPRESSO ✢</p>
   </section>
 
   <div class="victorian-scroll reveal">
-    <svg viewBox="0 0 240 24"><path d="M15,12 L30,6 L45,12 L60,6 L75,12 L90,6 L105,12 L120,12 L135,12 L150,6 L165,12 L180,6 L195,12 L210,6 L225,12" stroke="currentColor" fill="none"/><circle cx="120" cy="12" r="3" fill="#C5A059"/></svg>
+    <svg viewBox="0 0 260 24"><path d="M15,12 L30,6 L45,12 L60,6 L75,12 L90,6 L105,12 L120,12 L135,12 L150,6 L165,12 L180,6 L195,12 L210,6 L225,12 L240,6 L250,12" stroke="url(#goldGrad)" fill="none"/><circle cx="130" cy="12" r="3.5" fill="#D4AF37"/></svg>
   </div>
 
-  <!-- Gallery: ZERO external images, only CSS placeholders -->
+  <!-- Gallery with dynamic grid -->
   <section id="gallery" class="container reveal">
-    <h2 class="serif-display" style="text-align: center; color: var(--gold);">THE ATELIER</h2>
-    <div style="display:flex; justify-content:center; gap:1rem; margin:1.5rem 0;">
-      <div class="ornate-line" style="width:50px;"></div>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/></svg>
-      <div class="ornate-line" style="width:50px;"></div>
+    <h2 class="serif-display" style="text-align: center; background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent;">THE ATELIER</h2>
+    <div style="display:flex; justify-content:center; gap:1.5rem; margin:1.8rem 0;">
+      <div style="width:60px; height:1px; background:var(--border-metallic);"></div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#goldGrad)"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/></svg>
+      <div style="width:60px; height:1px; background:var(--border-metallic);"></div>
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Barber precision — custom image slot"></div></div>
-      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Leather chair & mirrors — your photography"></div></div>
-      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Gentleman grooming — replace with own asset"></div></div>
+    <div class="grid-dynamic">
+      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Precision cut — custom photography slot"></div></div>
+      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Leather & brass — drop your asset"></div></div>
+      <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Gentleman ritual — replace with your image"></div></div>
     </div>
-    <p style="text-align:center; opacity:0.7;">⟡ Hover to reveal — drop your photography here ⟡</p>
+    <p style="text-align:center; opacity:0.6; margin-top:1.2rem; letter-spacing:3px;">⟡ HOVER TO REVEAL · YOUR PHOTOGRAPHY HERE ⟡</p>
   </section>
 
+  <!-- Footer / Contact -->
   <footer id="contact" class="footer">
     <div class="container reveal">
-      <h3 class="serif-display" style="color: var(--gold);">VANGUARD GROOMING</h3>
-      <p>42 Savile Row, Mayfair, London</p>
+      <h3 class="serif-display" style="background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: clamp(2rem, 6vw, 3.2rem);">VANGUARD GROOMING</h3>
+      <p style="font-size: clamp(0.9rem, 2.5vw, 1.1rem);">42 Savile Row, Mayfair, London</p>
       <p>✆ +44 20 7917 0000  |  ✉ chair@vanguardgrooming.com</p>
       <div class="social-icons">
-        <!-- All inline SVGs (no FA) -->
-        <a href="#" aria-label="Instagram" rel="noopener"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a>
-        <a href="#" aria-label="X" rel="noopener"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4L20 20M20 4L4 20"/></svg></a>
-        <a href="#" aria-label="Facebook" rel="noopener"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a>
+        <a href="#" aria-label="X" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4L20 20M20 4L4 20"/></svg></a>
+        <a href="#" aria-label="Facebook" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z"/></svg></a>
       </div>
-      <div class="repeat-est">ESTD 1892 ✦ TRADITION & BLADE ✦ ESTD 1892</div>
-      <p style="margin-top:2rem; font-size:0.7rem; opacity:0.5;">© Vanguard Grooming — Zero dependencies. Analog soul.</p>
+      <div class="repeat-est">ESTD 1892 ✦ GILDED CRAFT ✦ ESTD 1892</div>
+      <p style="margin-top:2.5rem; font-size:0.7rem; opacity:0.4;">© Vanguard Grooming — Zero dependencies. Gilded Age artifact.</p>
     </div>
   </footer>
 </main>
@@ -393,85 +455,69 @@
 <script>
   (function(){
     "use strict";
-    // STRICT IIFE — zero innerHTML, textContent only. No console.log spam.
-
-    // ----- FRAME BUSTING (defense) -----
+    // Self-executing anonymous function — hardened, no console.log, no innerHTML.
+    
     if (window.top !== window.self) window.top.location = window.self.location;
 
-    // ----- REVEAL + STAGGERED (micro-interaction) -----
+    // REVEAL + STAGGER (expensive transitions)
     const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
           const staggers = entry.target.querySelectorAll('.stagger-item');
-          staggers.forEach((el, i) => { setTimeout(() => el.classList.add('visible'), i * 70); });
-          observer.unobserve(entry.target);
+          staggers.forEach((el, i) => { setTimeout(() => el.classList.add('visible'), i * 65); });
+          obs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
-    revealEls.forEach(el => observer.observe(el));
+    revealEls.forEach(el => obs.observe(el));
 
-    // Mark service items & gallery as stagger for progressive fade
+    // Mark service & gallery as stagger items
     document.querySelectorAll('.service-item, .gallery-item').forEach((item, idx) => {
       item.classList.add('stagger-item');
       item.style.transitionDelay = (idx * 0.04) + 's';
     });
 
-    // On load, trigger visibility for elements already in view
     window.addEventListener('load', () => {
       revealEls.forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight - 80) {
           el.classList.add('active');
-          el.querySelectorAll('.stagger-item').forEach((child, i) => {
-            setTimeout(() => child.classList.add('visible'), i * 50);
-          });
-          observer.unobserve(el);
+          el.querySelectorAll('.stagger-item').forEach((c, i) => setTimeout(() => c.classList.add('visible'), i * 45));
+          obs.unobserve(el);
         }
       });
     });
 
-    // ----- SCROLL LOGIC (Book now) -----
-    function scrollToContact(e) {
-      if (e) e.preventDefault();
-      const contact = document.getElementById('contact');
-      if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    const bookNav = document.getElementById('bookNowNavBtn');
-    const heroBook = document.getElementById('heroBookBtn');
-    if (bookNav) bookNav.addEventListener('click', scrollToContact);
-    if (heroBook) heroBook.addEventListener('click', scrollToContact);
+    // BOOK NOW scroll logic (premium)
+    function scrollToContact(e) { if(e) e.preventDefault(); document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'}); }
+    document.getElementById('bookNowNavBtn')?.addEventListener('click', scrollToContact);
+    document.getElementById('heroBookBtn')?.addEventListener('click', scrollToContact);
 
-    // Smooth nav links
     document.querySelectorAll('.nav-links a:not(#bookNowNavBtn)').forEach(link => {
       link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         if (href && href.startsWith('#')) {
           e.preventDefault();
-          const id = href.substring(1);
-          const target = document.getElementById(id);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-          else if (id === 'contact') document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+          const target = document.getElementById(href.substring(1));
+          if (target) target.scrollIntoView({behavior:'smooth'});
         }
       });
     });
 
-    // Micro-interactions: magnetic feel on buttons (scale transform)
-    const btns = document.querySelectorAll('.btn-gold, .book-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('mouseenter', () => btn.style.transition = 'transform 0.25s, background 0.3s, clip-path 0.3s');
-    });
-
-    // Service row hover (no innerHTML used)
+    // Micro-interactions: metallic hover on service rows
     document.querySelectorAll('.service-item').forEach(row => {
-      row.addEventListener('mouseenter', () => row.style.backgroundColor = 'rgba(197,160,89,0.06)');
+      row.addEventListener('mouseenter', () => row.style.backgroundColor = 'rgba(212,175,55,0.05)');
       row.addEventListener('mouseleave', () => row.style.backgroundColor = '');
     });
 
-    // Security: ensure any external link gets rel (none, but safe)
+    // Security: enforce rel
     document.querySelectorAll('a').forEach(a => { if (a.hostname !== location.hostname) a.rel = 'noopener noreferrer'; });
   })();
 </script>
+
+<!-- Hidden gradient definitions for reusability (no external) -->
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4AF37"/><stop offset="50%" stop-color="#F3E5AB"/><stop offset="100%" stop-color="#D4AF37"/></linearGradient></defs></svg>
 </body>
-</html>
+        </html>

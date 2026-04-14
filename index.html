@@ -3,132 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <!-- Zero‑dependency premium barbershop — Vanguard Grooming -->
-  <title>VANGUARD GROOMING | Refined Gentlemen’s Atelier</title>
-
-  <!-- STRICT CONTENT SECURITY POLICY (zero external calls) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-
-  <!-- Anti‑clickjacking / frame busting (defense in depth) -->
+  <!-- SECURITY: Strict Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>Vanguard Grooming | Heritage Barber & Gentlemen's Atelier</title>
+  
   <style>
-    /* inline frame‑busting style – if embedded, hide content */
-    html { display: none; } 
-    /* will be re‑displayed via JS after frame‑check */
-  </style>
-
-  <style>
-    /* ---------- RESET & BASE — DEPENDENCY‑FREE SYSTEM STACK ---------- */
+    /* ---------- RESET & SYSTEM FONTS (HIGH-END EDITORIAL STACK) ---------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* editorial serif stack (elegant, premium, no google fonts) */
+    /* Serif heading stack: elegant, timeless. Sans body: clean, modern. */
     :root {
-      --charcoal: #0c0b0a;
+      --charcoal: #0c0c0c;
       --gold: #C5A059;
-      --gold-deep: #a78644;
-      --cream: #f2ebe0;
-      --glass-bg: rgba(8, 7, 6, 0.5);
-      --glass-border: rgba(197, 160, 89, 0.35);
-      --shadow-gold: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(197,160,89,0.15);
-      --serif-heading: 'Times New Roman', Times, Baskerville, Georgia, serif;
-      --sans-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --gold-dim: #9e7e45;
+      --cream: #F2E9D8;
+      --glass-bg: rgba(8, 8, 8, 0.65);
+      --border-light: rgba(197, 160, 89, 0.25);
+      --transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+      --font-serif: 'Times New Roman', Times, Georgia, 'Playfair Display', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       background-color: var(--charcoal);
       color: var(--cream);
-      font-family: var(--sans-body);
+      font-family: var(--font-sans);
       font-weight: 300;
       line-height: 1.5;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
 
-    /* ---------- PURE CSS GRAIN (BASE64 SVG NOISE — ZERO DEP) ---------- */
+    /* ---------- GRAIN TEXTURE (PURE CSS + BASE64 SVG — ZERO DEPENDENCY) ---------- */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
       background-repeat: repeat;
       pointer-events: none;
-      z-index: 996;
-      opacity: 0.45;
+      z-index: 999;
+      opacity: 0.5;
       mix-blend-mode: overlay;
     }
 
-    /* subtle grain overlay on content */
-    .grain-enhancer {
-      position: relative;
-      isolation: isolate;
+    /* enhanced grain overlay via pseudo for depth */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(20,20,20,0.2) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 998;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: #0a0a0a;
     }
 
     html {
       scroll-behavior: smooth;
     }
 
-    ::selection {
-      background: var(--gold);
-      color: #0c0b0a;
-    }
-
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 2rem;
+      position: relative;
+      z-index: 5;
     }
 
-    /* typography — editorial */
-    h1, h2, h3, .serif-title {
-      font-family: var(--serif-heading);
-      font-weight: 600;
+    /* typography */
+    h1, h2, h3, .serif-display {
+      font-family: var(--font-serif);
+      font-weight: 700;
       letter-spacing: 1.5px;
+    }
+
+    .gold-text { color: var(--gold); }
+    .gold-border { border: 1px solid var(--gold); }
+
+    /* ornate divider */
+    .ornate-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .ornate-line {
+      width: 70px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+    }
+    .ornate-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    /* buttons */
+    .btn-gold {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      padding: 0.8rem 2rem;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+      text-decoration: none;
       text-transform: uppercase;
     }
-
-    .gold-text {
-      color: var(--gold);
+    .btn-gold:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(197, 160, 89, 0.4);
     }
 
-    /* ---------- GLASS NAVBAR (blur + border) ---------- */
+    /* ---------- GLASSMORPHISM NAVBAR (backdrop-filter) ---------- */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2.2rem;
+      padding: 1.2rem 2rem;
       flex-wrap: wrap;
       background: var(--glass-bg);
       backdrop-filter: blur(12px) saturate(180%);
       -webkit-backdrop-filter: blur(12px) saturate(180%);
-      border-bottom: 1px solid var(--glass-border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      border-bottom: 1px solid var(--border-light);
       position: sticky;
       top: 0;
-      z-index: 997;
+      z-index: 100;
     }
-
     .logo {
-      font-family: var(--serif-heading);
-      font-size: 1.9rem;
-      font-weight: 600;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
       letter-spacing: 3px;
       color: var(--cream);
       text-transform: uppercase;
     }
-    .logo span {
-      color: var(--gold);
-      font-weight: 700;
-    }
-
+    .logo span { color: var(--gold); }
     .nav-links {
       display: flex;
-      gap: 2.2rem;
+      gap: 2rem;
       align-items: center;
       list-style: none;
     }
@@ -138,194 +168,192 @@
       font-weight: 400;
       font-size: 0.9rem;
       letter-spacing: 1.5px;
-      transition: color 0.25s;
+      transition: color 0.3s;
       padding: 0.3rem 0;
       border-bottom: 1px solid transparent;
     }
-    .nav-links a:hover {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
+    .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
     .book-btn {
       background: transparent;
-      border: 1.5px solid var(--gold);
-      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--gold);
+      padding: 0.5rem 1.4rem;
       font-weight: 500;
-      color: var(--gold);
-      transition: 0.25s;
+      transition: var(--transition);
       cursor: pointer;
+      color: var(--gold);
     }
-    .book-btn:hover {
-      background: var(--gold);
-      color: #0c0b0a;
-    }
+    .book-btn:hover { background: var(--gold); color: #0a0a0a; }
 
-    /* ---------- HERO ---------- */
+    /* hero */
     .hero {
       text-align: center;
-      padding: 4.5rem 1.5rem 5.5rem;
+      padding: 5rem 1rem 5rem;
     }
     .hero h1 {
       font-size: 4.2rem;
       color: var(--cream);
-      text-shadow: 2px 2px 0px rgba(197, 160, 89, 0.2);
+      text-shadow: 2px 2px 0px rgba(197, 160, 89, 0.15);
       letter-spacing: 6px;
-      line-height: 1.1;
+      line-height: 1.2;
     }
-    .est {
-      font-family: var(--serif-heading);
-      font-size: 1.3rem;
-      letter-spacing: 7px;
+    .hero .est {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      letter-spacing: 8px;
       margin: 1rem 0;
       color: var(--gold);
     }
-
-    .btn-gold {
-      background: transparent;
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      padding: 0.9rem 2.5rem;
-      font-family: var(--sans-body);
-      font-weight: 500;
-      letter-spacing: 2px;
-      transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-      cursor: pointer;
-      display: inline-block;
-      backdrop-filter: blur(4px);
-      text-decoration: none;
+    .gold-divider-hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 2rem auto;
     }
-    .btn-gold:hover {
+    .gold-divider-hero .line {
+      width: 80px;
+      height: 1px;
       background: var(--gold);
-      color: var(--charcoal);
-      box-shadow: 0 0 20px rgba(197,160,89,0.3);
     }
 
     /* ---------- STAGGERED REVEAL (sophisticated) ---------- */
     .reveal {
       opacity: 0;
-      transform: translateY(40px) scale(0.99);
-      transition: opacity 0.85s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.85s cubic-bezier(0.2, 0.9, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(45px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
+      will-change: transform, opacity;
     }
     .reveal.active {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
-
-    /* Stagger children inside reveal (optional extra sophistication) */
-    .reveal-stagger > * {
+    /* staggered children via transition-delay — applied via js */
+    .stagger-item {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      transition-delay: calc(0.08s * var(--i, 0));
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.15, 0.85, 0.35, 1);
     }
-    .reveal-stagger.active > * {
+    .stagger-item.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
     /* price list */
     .price-list {
-      background: rgba(12, 11, 10, 0.7);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      padding: 2.5rem 2.2rem;
+      background: rgba(8, 8, 8, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 2.2rem 2rem;
       border-left: 4px solid var(--gold);
-      margin: 2.2rem 0;
+      margin: 2rem 0;
+      box-shadow: 0 10px 25px -10px rgba(0,0,0,0.7);
     }
     .service-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      border-bottom: 1px dotted rgba(197, 160, 89, 0.55);
-      padding: 1.2rem 0;
-      font-weight: 400;
+      border-bottom: 1px dotted rgba(197, 160, 89, 0.4);
+      padding: 1.1rem 0;
+      font-family: var(--font-sans);
+      font-weight: 300;
     }
     .service-name {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 500;
       letter-spacing: 1px;
     }
+    .service-dots {
+      flex: 1;
+      border-bottom: 1px dotted var(--gold);
+      margin: 0 1.2rem;
+      height: 1em;
+    }
     .service-price {
-      font-family: var(--serif-heading);
+      font-family: var(--font-serif);
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--gold);
     }
 
-    /* Gallery — images replaced by CSS placeholders with alt */
+    /* Gallery grid — placeholders with pure CSS image replacement */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.2rem;
-      margin: 2.2rem 0 3rem;
+      gap: 2rem;
+      margin: 2.5rem 0;
     }
     .gallery-item {
       position: relative;
-      background: #0a0908;
-      border: 1px solid rgba(197, 160, 89, 0.25);
-      border-radius: 4px;
       overflow: hidden;
-      box-shadow: var(--shadow-gold);
-      transition: transform 0.3s ease, border-color 0.3s;
+      border-radius: 4px;
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      transition: var(--transition);
+      background: #15110c;
+      box-shadow: 0 15px 25px -10px #000;
+      aspect-ratio: 4 / 5;
+    }
+    /* IMAGE PLACEHOLDER — pure CSS + text description — user drops own assets later */
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(145deg, #2a241c 0%, #0f0e0c 100%);
+      filter: sepia(0.7) contrast(1.1) brightness(0.8);
+      transition: filter 0.7s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .gallery-item:hover .gallery-img {
+      filter: sepia(0.1) contrast(1.05) brightness(1);
+      transform: scale(1.06);
     }
     .gallery-item:hover {
       border-color: var(--gold);
+      box-shadow: 0 22px 30px -8px rgba(197, 160, 89, 0.25);
       transform: translateY(-6px);
     }
-
-    /* PLACEHOLDER IMAGES (NO CDN) — pure CSS with gradient overlay, ready for assets */
-    .gallery-img {
-      width: 100%;
-      height: 320px;
-      background: linear-gradient(145deg, #1f1b16 0%, #2a231c 100%);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: sepia(0.65) contrast(1.1) brightness(0.85);
-      transition: filter 0.5s, transform 0.5s;
-    }
-    .gallery-item:hover .gallery-img {
-      filter: sepia(0.1) contrast(1.05) brightness(1.05);
-      transform: scale(1.02);
-    }
-
-    /* Inline SVG icons inside placeholders (barber icon) */
-    .img-placeholder-svg {
-      width: 70px;
-      height: 70px;
-      opacity: 0.45;
-      color: var(--gold);
-    }
-    .img-alt-text {
+    /* overlay caption */
+    .gallery-item::after {
+      content: "⟡ ATELIER ⟡";
       position: absolute;
-      bottom: 10px;
-      left: 0;
-      right: 0;
+      bottom: -45px;
+      left: 0; right: 0;
+      background: rgba(8,8,8,0.8);
+      backdrop-filter: blur(6px);
+      color: var(--gold);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
       text-align: center;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      color: var(--cream);
-      background: rgba(0,0,0,0.3);
-      padding: 5px;
-      backdrop-filter: blur(2px);
+      padding: 10px;
+      border-top: 1px solid var(--gold);
+      transition: bottom 0.4s ease;
+      pointer-events: none;
+      text-transform: uppercase;
     }
+    .gallery-item:hover::after { bottom: 0; }
 
-    /* ornate dividers with inline SVG */
+    /* victorian scroll svg (inline) */
+    .victorian-scroll svg {
+      width: 200px;
+      max-width: 70%;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+    }
     .victorian-scroll {
       text-align: center;
-      margin: 2.5rem 0;
+      margin: 1.5rem 0;
+      opacity: 0.8;
     }
 
     /* footer */
     .footer {
-      background: #080706;
-      padding: 3rem 2rem 2rem;
+      background: #070707;
+      padding: 3.5rem 2rem 2.5rem;
       margin-top: 4rem;
-      border-top: 1px solid rgba(197,160,89,0.45);
+      border-top: 1px solid rgba(197,160,89,0.3);
       text-align: center;
+      backdrop-filter: blur(2px);
     }
     .social-icons {
       display: flex;
@@ -335,254 +363,237 @@
     }
     .social-icons a {
       color: var(--cream);
-      transition: color 0.25s;
+      transition: color 0.3s;
       text-decoration: none;
     }
-    .social-icons a:hover {
-      color: var(--gold);
-    }
-    /* inline svg icons */
-    .icon-svg {
-      width: 28px;
-      height: 28px;
-      fill: currentColor;
-      stroke: none;
+    .social-icons a:hover { color: var(--gold); }
+    .repeat-est {
+      font-family: var(--font-serif);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: rgba(242,233,216,0.4);
+      word-spacing: 8px;
     }
 
     /* responsive */
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 0.8rem;
-      }
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-      .service-item {
-        flex-direction: column;
-        gap: 5px;
-      }
+      .navbar { flex-direction: column; gap: 1rem; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .hero h1 { font-size: 2.8rem; }
+      .container { padding: 0 1.2rem; }
+      .service-dots { display: none; }
+      .service-item { flex-direction: column; gap: 0.3rem; }
     }
+
+    /* ARIA / accessibility */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; }
   </style>
 </head>
-<body id="top">
-  <!-- FRAME BUSTING + ANTI‑CLICKJACK (prevent iframe rendering) -->
-  <script>
-    (function() {
-      // frame busting: if in iframe, break out (and ensure html display)
-      if (window.top !== window.self) {
-        window.top.location = window.self.location;
-      }
-      // reveal the html (override display:none from style)
-      document.documentElement.style.display = 'block';
-    })();
-  </script>
+<body>
 
-  <!-- GLASS NAVIGATION — semantic, ARIA -->
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="logo" aria-label="Vanguard Grooming">VANGUARD<span>GROOMING</span></div>
-    <ul class="nav-links" role="list">
-      <li role="listitem"><a href="#home" aria-current="location">HOME</a></li>
-      <li role="listitem"><a href="#services">SERVICES</a></li>
-      <li role="listitem"><a href="#gallery">GALLERY</a></li>
-      <li role="listitem"><a href="#contact">VISIT</a></li>
-      <li role="listitem"><a href="#contact" class="book-btn" id="bookNowNavBtn" rel="noopener">BOOK NOW</a></li>
-    </ul>
-  </nav>
+<!-- Frame busting / anti-clickjacking (already CSP frame-ancestors) + additional script -->
+<script>
+  // Frame busting (redundant but defense in depth)
+  if (window.top !== window.self) { window.top.location = window.self.location; }
+</script>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="home" class="hero container reveal" aria-label="Hero">
-      <div class="est">EST. 2018</div>
-      <h1>VANGUARD<br>GROOMING</h1>
-      <div style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0;">
-        <span style="width: 70px; height: 2px; background: var(--gold);"></span>
-        <!-- Inline SVG diamond -->
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 22,12 12,22 2,12" /></svg>
-        <span style="width: 70px; height: 2px; background: var(--gold);"></span>
-      </div>
-      <p style="max-width:600px; margin:1.5rem auto; font-weight:350;">Precision cuts. Vintage soul. Modern execution.</p>
-      <a href="#contact" class="btn-gold" id="heroBookBtn" rel="noopener">RESERVE YOUR CHAIR</a>
-    </section>
+<!-- Navigation: glassmorphism, no external icons, inline SVGs for icons -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="logo" aria-label="Vanguard Grooming">VANGUARD<span>GROOMING</span></div>
+  <ul class="nav-links" role="list">
+    <li role="listitem"><a href="#home" aria-current="page">HOME</a></li>
+    <li role="listitem"><a href="#services">SERVICES</a></li>
+    <li role="listitem"><a href="#gallery">GALLERY</a></li>
+    <li role="listitem"><a href="#contact">VISIT</a></li>
+    <li role="listitem"><a href="#contact" class="book-btn" id="bookNowNavBtn" rel="noopener noreferrer">BOOK NOW</a></li>
+  </ul>
+</nav>
 
-    <!-- Victorian divider SVG (inline) -->
-    <div class="victorian-scroll reveal" aria-hidden="true">
-      <svg width="200" height="24" viewBox="0 0 200 24" fill="none" stroke="var(--gold)" stroke-width="1.2"><path d="M10,12 L30,6 L50,12 L70,6 L90,12 L110,12 L130,12 L150,6 L170,12 L190,6"/><circle cx="100" cy="12" r="3" fill="var(--gold)"/></svg>
+<main>
+  <!-- Hero -->
+  <section id="home" class="hero container reveal">
+    <div class="est">EST. 1892</div>
+    <h1>VANGUARD<br>OF REFINEMENT</h1>
+    <div class="gold-divider-hero">
+      <div class="line"></div>
+      <!-- Inline SVG Diamond -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 22,12 12,22 2,12" /></svg>
+      <div class="line"></div>
     </div>
+    <p style="max-width: 600px; margin: 1.5rem auto; font-weight: 300; letter-spacing: 0.5px;">Traditional craft. Modern edge. Where the blade meets legacy.</p>
+    <a href="#contact" class="btn-gold" id="heroBookBtn" rel="noopener noreferrer">RESERVE YOUR CHAIR</a>
+  </section>
 
-    <!-- SERVICES / PRICE LIST -->
-    <section id="services" class="container reveal" aria-labelledby="services-heading">
-      <h2 id="services-heading" class="serif-title" style="font-size: 2.6rem; text-align: center; color: var(--gold);">THE CUTTING ROOM</h2>
-      <div style="display:flex; justify-content:center; gap:1rem; margin:1.2rem 0;">
-        <span style="width:60px; height:1.5px; background:var(--gold);"></span>
-        <!-- scissors inline SVG -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" aria-hidden="true"><path d="M6 9L18 18M6 15L18 6" stroke-width="2"/><circle cx="6" cy="9" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-        <span style="width:60px; height:1.5px; background:var(--gold);"></span>
-      </div>
-      <div class="price-list">
-        <div class="service-item"><span class="service-name">Signature Cut & Consultation</span><span class="service-price">$75</span></div>
-        <div class="service-item"><span class="service-name">Hot Towel Straight Razor Shave</span><span class="service-price">$55</span></div>
-        <div class="service-item"><span class="service-name">Beard Sculpt & Steam Ritual</span><span class="service-price">$48</span></div>
-        <div class="service-item"><span class="service-name">The Executive (Hair + Shave)</span><span class="service-price">$135</span></div>
-        <div class="service-item"><span class="service-name">Head Spa & Tonic Treatment</span><span class="service-price">$160</span></div>
-      </div>
-      <p style="text-align:center;"><span style="color:var(--gold);">✧</span> Complimentary whiskey or espresso <span style="color:var(--gold);">✧</span></p>
-    </section>
+  <!-- Victorian SVG divider (inline) -->
+  <div class="victorian-scroll reveal">
+    <svg viewBox="0 0 240 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,12 Q35,5 50,12 T80,12 T110,12 T140,12 T170,12 T200,12 T220,12" stroke="currentColor" fill="none"/>
+      <circle cx="120" cy="12" r="3" fill="#C5A059" />
+    </svg>
+  </div>
 
-    <!-- another scroll divider -->
-    <div class="victorian-scroll reveal" aria-hidden="true">
-      <svg width="220" height="20" viewBox="0 0 220 20" fill="none" stroke="var(--gold)"><path d="M15,10 L35,4 L55,10 L75,4 L95,10 L115,10 L135,10 L155,4 L175,10 L195,4 L215,10"/><circle cx="115" cy="10" r="3" fill="var(--gold)"/></svg>
+  <!-- Services: vintage price list (no external icons) -->
+  <section id="services" class="container reveal">
+    <div style="text-align: center;">
+      <h2 class="serif-display" style="font-size: 2.5rem; color: var(--gold);">THE CUTTING ROOM</h2>
+      <div class="ornate-divider">
+        <div class="ornate-line"></div>
+        <!-- inline scissors SVG -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M6 6L18 18M18 6L6 18" /><circle cx="7" cy="7" r="2" /><circle cx="17" cy="17" r="2" /></svg>
+        <div class="ornate-line"></div>
+      </div>
     </div>
+    <div class="price-list">
+      <div class="service-item"><span class="service-name">The Signature Cut</span><span class="service-dots"></span><span class="service-price">$75</span></div>
+      <div class="service-item"><span class="service-name">Hot Towel Royal Shave</span><span class="service-dots"></span><span class="service-price">$55</span></div>
+      <div class="service-item"><span class="service-name">Beard Sculpt & Steam</span><span class="service-dots"></span><span class="service-price">$48</span></div>
+      <div class="service-item"><span class="service-name">The Vanguard (Cut + Shave)</span><span class="service-dots"></span><span class="service-price">$135</span></div>
+      <div class="service-item"><span class="service-name">Head Spa & Ritual</span><span class="service-dots"></span><span class="service-price">$160</span></div>
+    </div>
+    <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem;"><span aria-hidden="true">✢</span> Whiskey or espresso service included <span aria-hidden="true">✢</span></div>
+  </section>
 
-    <!-- GALLERY — PLACEHOLDERS WITH INLINE SVG (no external images) -->
-    <section id="gallery" class="container reveal" aria-labelledby="gallery-heading">
-      <h2 id="gallery-heading" class="serif-title" style="font-size:2.2rem; text-align:center; color:var(--gold);">THE ATELIER</h2>
-      <div style="display:flex; justify-content:center; margin:1rem 0 1.8rem;">
-        <svg width="40" height="8" viewBox="0 0 40 8"><line x1="0" y1="4" x2="40" y2="4" stroke="var(--gold)" stroke-dasharray="2 4"/></svg>
+  <div class="victorian-scroll reveal">
+    <svg viewBox="0 0 240 24"><path d="M15,12 L30,6 L45,12 L60,6 L75,12 L90,6 L105,12 L120,12 L135,12 L150,6 L165,12 L180,6 L195,12 L210,6 L225,12" stroke="currentColor" fill="none" /><circle cx="120" cy="12" r="3" fill="#C5A059"/></svg>
+  </div>
+
+  <!-- Gallery: placeholders with alt text for custom assets -->
+  <section id="gallery" class="container reveal">
+    <h2 class="serif-display" style="font-size: 2.2rem; text-align: center; color: var(--gold);">THE ATELIER</h2>
+    <div class="ornate-divider"><div class="ornate-line"></div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)"><rect x="2" y="2" width="20" height="20" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /></svg><div class="ornate-line"></div></div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-img" role="img" aria-label="Barber precision cut — replace with your image"></div>
       </div>
-      <div class="gallery-grid">
-        <!-- item 1 -->
-        <div class="gallery-item">
-          <div class="gallery-img" role="img" aria-label="Barber precision cut with vintage tools">
-            <!-- inline SVG barber pole / scissors placeholder -->
-            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="8" y="8" width="24" height="24" rx="4" stroke="var(--gold)"/>
-              <circle cx="20" cy="20" r="6" stroke="var(--gold)"/>
-              <path d="M14 14 L26 26 M26 14 L14 26" stroke="var(--gold)"/>
-            </svg>
-            <span class="img-alt-text">PRECISION CUT</span>
-          </div>
-        </div>
-        <!-- item 2 -->
-        <div class="gallery-item">
-          <div class="gallery-img" role="img" aria-label="Leather barber chair and warm interior">
-            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="var(--gold)">
-              <path d="M12 28 L12 18 Q12 12 20 12 Q28 12 28 18 L28 28" stroke-width="1.5"/>
-              <rect x="10" y="28" width="20" height="6" stroke="var(--gold)"/>
-            </svg>
-            <span class="img-alt-text">HERITAGE CHAIR</span>
-          </div>
-        </div>
-        <!-- item 3 -->
-        <div class="gallery-item">
-          <div class="gallery-img" role="img" aria-label="Gentleman receiving luxury shave">
-            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="var(--gold)">
-              <circle cx="20" cy="16" r="8" />
-              <path d="M16 24 L20 28 L24 24" />
-            </svg>
-            <span class="img-alt-text">HOT TOWEL RITUAL</span>
-          </div>
-        </div>
+      <div class="gallery-item">
+        <div class="gallery-img" role="img" aria-label="Victorian chair and leather — replace with your image"></div>
       </div>
-      <p style="text-align:center; font-style:italic;">⟡ Hover to reveal richness — drop your own assets ⟡</p>
-    </section>
-
-    <!-- FOOTER / CONTACT (Zero external, semantic) -->
-    <footer id="contact" class="footer" aria-label="Contact and location">
-      <div class="container reveal">
-        <h3 class="serif-title" style="font-size:2.2rem; color:var(--gold);">VANGUARD</h3>
-        <p>42 Savile Row, Mayfair, London</p>
-        <p>✆ +44 (0)20 7917 0022  |  book@vanguardgrooming.com</p>
-        <!-- Social icons with inline SVG (no font awesome) -->
-        <div class="social-icons">
-          <a href="#" aria-label="Instagram" rel="noopener noreferrer">
-            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" fill="none" stroke-width="1.5"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" fill="none"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
-          </a>
-          <a href="#" aria-label="X (Twitter)" rel="noopener noreferrer">
-            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" rel="noopener noreferrer">
-            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H14C12 3 10 5 10 7V10H7V14H10V21H14V14H17L18 10H14V7C14 6.5 14.5 6 15 6H18V3Z" stroke="currentColor" fill="none"/></svg>
-          </a>
-        </div>
-        <p style="letter-spacing:4px; opacity:0.7;">EST. 2018 ✦ EST. 2018 ✦ EST. 2018</p>
-        <p style="margin-top:1.8rem; font-size:0.75rem;">© Vanguard Grooming — Traditional Craft, Uncompromising</p>
+      <div class="gallery-item">
+        <div class="gallery-img" role="img" aria-label="Gentleman grooming ritual — replace with your image"></div>
       </div>
-    </footer>
-  </main>
+    </div>
+    <p style="text-align: center; font-size: 0.85rem; opacity: 0.7;">⟡ Hover to reveal depth — drop your own photography ⟡</p>
+  </section>
 
-  <!-- ZERO‑DEPENDENCY JAVASCRIPT: reveal + secure scroll, no innerHTML -->
-  <script>
-    (function(){
-      "use strict";
+  <!-- Contact / Footer -->
+  <footer id="contact" class="footer">
+    <div class="container reveal">
+      <h3 class="serif-display" style="font-size: 2rem; color: var(--gold);">VANGUARD GROOMING</h3>
+      <p>42 Savile Row, Mayfair, London</p>
+      <p>✆ +44 20 7917 0000  |  ✉ chair@vanguardgrooming.com</p>
+      <div class="social-icons">
+        <!-- inline SVG icons, no external -->
+        <a href="#" aria-label="Instagram" rel="noopener noreferrer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="18" cy="6" r="1" /></svg></a>
+        <a href="#" aria-label="X" rel="noopener noreferrer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4L20 20M20 4L4 20" /></svg></a>
+        <a href="#" aria-label="Facebook" rel="noopener noreferrer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z"/></svg></a>
+      </div>
+      <div class="repeat-est">ESTD 1892 ✦ TRADITION & BLADE ✦ ESTD 1892</div>
+      <p style="margin-top: 1.8rem; font-size: 0.7rem; opacity: 0.5;">© Vanguard Grooming — Zero dependency. Crafted in code.</p>
+    </div>
+  </footer>
+</main>
 
-      // --- SANITIZED REVEAL (Intersection Observer, no innerHTML)
-      const revealEls = document.querySelectorAll('.reveal');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            // optional: add child stagger class if exists
-            if (entry.target.classList.contains('reveal-stagger')) {
-              // just in case, already handled by css
-            }
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+<script>
+  (function() {
+    "use strict";
 
-      revealEls.forEach(el => observer.observe(el));
+    // ----- SECURITY: Sanitized, no innerHTML for dynamic content, all via textContent / createElement -----
+    
+    // FRAME BUSTING again (defense)
+    if (window.top !== window.self) { window.top.location = window.self.location; }
 
-      // Activate visible on load
-      window.addEventListener('load', () => {
-        revealEls.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 80) {
-            el.classList.add('active');
-          }
-        });
-      });
-
-      // --- SECURE SCROLL (Book Now, nav) - no innerHTML, using textContent if needed
-      function scrollToContact(e) {
-        if (e) e.preventDefault();
-        const contact = document.getElementById('contact');
-        if (contact) {
-          contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // ---------- STAGGERED REVEAL (advanced) ----------
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          
+          // Stagger children inside reveal (if any have .stagger-item)
+          const staggerChildren = entry.target.querySelectorAll('.stagger-item');
+          staggerChildren.forEach((child, index) => {
+            setTimeout(() => { child.classList.add('visible'); }, index * 80);
+          });
+          
+          observer.unobserve(entry.target);
         }
-      }
-
-      const bookNav = document.getElementById('bookNowNavBtn');
-      const heroBook = document.getElementById('heroBookBtn');
-      if (bookNav) bookNav.addEventListener('click', scrollToContact);
-      if (heroBook) heroBook.addEventListener('click', scrollToContact);
-
-      // all nav links smooth (using textContent, no innerHTML)
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        if (link.id === 'bookNowNavBtn') return;
-        link.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const targetId = href.substring(1);
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else if (targetId === 'contact') {
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
       });
+    }, { threshold: 0.2, rootMargin: "0px 0px -10px 0px" });
+    
+    revealElements.forEach(el => observer.observe(el));
 
-      // service item hover effect (safe)
-      document.querySelectorAll('.service-item').forEach(item => {
-        item.addEventListener('mouseenter', () => item.style.backgroundColor = 'rgba(197,160,89,0.06)');
-        item.addEventListener('mouseleave', () => item.style.backgroundColor = '');
+    // Additionally, mark any service-item as stagger-item for extra flair? We'll manually add class later in HTML
+    // For demonstration, we add stagger-item to service items for progressive reveal.
+    document.querySelectorAll('.service-item').forEach((item, idx) => {
+      item.classList.add('stagger-item');
+      item.style.transitionDelay = (idx * 0.05) + 's';
+    });
+    // Gallery items
+    document.querySelectorAll('.gallery-item').forEach((item, idx) => {
+      item.classList.add('stagger-item');
+      item.style.transitionDelay = (idx * 0.08) + 's';
+    });
+
+    // On load, trigger check
+    window.addEventListener('load', () => {
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) {
+          el.classList.add('active');
+          el.querySelectorAll('.stagger-item').forEach((child, i) => {
+            setTimeout(() => child.classList.add('visible'), i * 60);
+          });
+          observer.unobserve(el);
+        }
       });
+    });
 
-      // Security: enforce rel="noopener noreferrer" on external (none exist but safety)
-      document.querySelectorAll('a[target="_blank"]').forEach(a => {
-        a.setAttribute('rel', 'noopener noreferrer');
+    // ---------- BOOK NOW scroll (maintain logic, fully accessible) ----------
+    function scrollToContact(e) {
+      if (e) e.preventDefault();
+      const contact = document.getElementById('contact');
+      if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    const bookNav = document.getElementById('bookNowNavBtn');
+    const heroBook = document.getElementById('heroBookBtn');
+    if (bookNav) bookNav.addEventListener('click', scrollToContact);
+    if (heroBook) heroBook.addEventListener('click', scrollToContact);
+
+    // Smooth nav links
+    document.querySelectorAll('.nav-links a:not(#bookNowNavBtn)').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const id = href.substring(1);
+          const target = document.getElementById(id);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+          else if (id === 'contact') document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
       });
+    });
 
-      // additional ARIA / accessibility
-      document.querySelector('.navbar').setAttribute('aria-label', 'Main navigation');
-      
-      console.log('Vanguard Grooming — zero‑dependency, hardened.');
-    })();
-  </script>
-  <!-- ensure any remaining # links have rel (none) -->
+    // Additional micro-interactions (no innerHTML usage)
+    const serviceRows = document.querySelectorAll('.service-item');
+    serviceRows.forEach(row => {
+      row.addEventListener('mouseenter', () => row.style.backgroundColor = 'rgba(197,160,89,0.06)');
+      row.addEventListener('mouseleave', () => row.style.backgroundColor = '');
+    });
+
+    // Ensure all external links (none) but any anchor uses rel appropriately
+    document.querySelectorAll('a[href^="http"]').forEach(a => a.setAttribute('rel', 'noopener noreferrer'));
+
+    // ARIA: enhance accessibility for current page (home)
+    // set current aria if needed, no innerHTML.
+    
+    // Purely CSS placeholders — user can drop images later.
+    console.log('Vanguard Grooming — hardened, self-contained, zero dependencies.');
+  })();
+</script>
+
+<!-- Additional ARIA landmark labels -->
+<span class="sr-only">Premium barbershop, traditional craft and modern luxury.</span>
 </body>
-    </html>
+  </html>

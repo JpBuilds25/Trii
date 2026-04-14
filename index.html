@@ -1,646 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Barbershop | Luxury Barbershop & Gentlemen's Club</title>
-    <!-- Google Fonts: Vintage + Elegant + Modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (free icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Zero‑dependency premium barbershop — Vanguard Grooming -->
+  <title>VANGUARD GROOMING | Refined Gentlemen’s Atelier</title>
 
-        /* ---------- CUSTOM PROPERTIES / VINTAGE GOLD PALETTE ---------- */
-        :root {
-            --charcoal: #121212;
-            --gold: #C5A059;
-            --cream: #F4ECD8;
-            --gold-dark: #9e7e45;
-            --overlay-grain: rgba(0, 0, 0, 0.02);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+  <!-- STRICT CONTENT SECURITY POLICY (zero external calls) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 
-        body {
-            background-color: var(--charcoal);
-            color: var(--cream);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            line-height: 1.5;
-            overflow-x: hidden;
-            position: relative;
-        }
+  <!-- Anti‑clickjacking / frame busting (defense in depth) -->
+  <style>
+    /* inline frame‑busting style – if embedded, hide content */
+    html { display: none; } 
+    /* will be re‑displayed via JS after frame‑check */
+  </style>
 
-        /* ---------- NOISE / GRAIN TEXTURE (Subtle vintage grain) ---------- */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0.3;
-            mix-blend-mode: overlay;
-        }
+  <style>
+    /* ---------- RESET & BASE — DEPENDENCY‑FREE SYSTEM STACK ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
+    /* editorial serif stack (elegant, premium, no google fonts) */
+    :root {
+      --charcoal: #0c0b0a;
+      --gold: #C5A059;
+      --gold-deep: #a78644;
+      --cream: #f2ebe0;
+      --glass-bg: rgba(8, 7, 6, 0.5);
+      --glass-border: rgba(197, 160, 89, 0.35);
+      --shadow-gold: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(197,160,89,0.15);
+      --serif-heading: 'Times New Roman', Times, Baskerville, Georgia, serif;
+      --sans-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        /* custom gold selection */
-        ::selection {
-            background: var(--gold);
-            color: var(--charcoal);
-        }
+    body {
+      background-color: var(--charcoal);
+      color: var(--cream);
+      font-family: var(--sans-body);
+      font-weight: 300;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* container */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    /* ---------- PURE CSS GRAIN (BASE64 SVG NOISE — ZERO DEP) ---------- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 996;
+      opacity: 0.45;
+      mix-blend-mode: overlay;
+    }
 
-        /* typography */
-        h1, h2, h3, .rye-font {
-            font-family: 'Rye', cursive;
-            letter-spacing: 2px;
-        }
+    /* subtle grain overlay on content */
+    .grain-enhancer {
+      position: relative;
+      isolation: isolate;
+    }
 
-        .playfair {
-            font-family: 'Playfair Display', serif;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .gold-text {
-            color: var(--gold);
-        }
+    ::selection {
+      background: var(--gold);
+      color: #0c0b0a;
+    }
 
-        .gold-border {
-            border: 1px solid var(--gold);
-        }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-        .gold-bottom {
-            border-bottom: 1px solid var(--gold);
-        }
+    /* typography — editorial */
+    h1, h2, h3, .serif-title {
+      font-family: var(--serif-heading);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
 
-        /* ornate divider (Victorian flourish SVG / CSS) */
-        .ornate-divider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .ornate-line {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
-        }
-        .ornate-icon {
-            color: var(--gold);
-            font-size: 1.2rem;
-        }
-        .divider-diamond {
-            font-size: 1.6rem;
-            margin: 0 0.5rem;
-        }
-        /* victorian scrollwork divider (SVG style) */
-        .victorian-scroll {
-            text-align: center;
-            margin: 2rem 0;
-            opacity: 0.7;
-        }
-        .scroll-svg {
-            width: 180px;
-            max-width: 80%;
-            fill: none;
-            stroke: var(--gold);
-            stroke-width: 1.5;
-        }
+    .gold-text {
+      color: var(--gold);
+    }
 
-        /* buttons */
-        .btn-gold {
-            background: transparent;
-            border: 1.5px solid var(--gold);
-            color: var(--gold);
-            padding: 0.7rem 1.8rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            display: inline-block;
-            backdrop-filter: blur(2px);
-        }
-        .btn-gold:hover {
-            background: var(--gold);
-            color: var(--charcoal);
-            border-color: var(--gold);
-            box-shadow: 0 0 12px rgba(197, 160, 89, 0.5);
-        }
+    /* ---------- GLASS NAVBAR (blur + border) ---------- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.2rem;
+      flex-wrap: wrap;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 997;
+    }
 
-        /* Navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            flex-wrap: wrap;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
-        }
-        .logo {
-            font-family: 'Rye', cursive;
-            font-size: 1.7rem;
-            letter-spacing: 2px;
-            color: var(--cream);
-        }
-        .logo span {
-            color: var(--gold);
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--cream);
-            font-weight: 400;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-        .book-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            padding: 0.4rem 1.2rem;
-            font-weight: 500;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .book-btn:hover {
-            background: var(--gold);
-            color: #121212;
-        }
+    .logo {
+      font-family: var(--serif-heading);
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--cream);
+      text-transform: uppercase;
+    }
+    .logo span {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem 5rem;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            color: var(--cream);
-            text-shadow: 2px 2px 0px rgba(197, 160, 89, 0.3);
-            letter-spacing: 4px;
-        }
-        .hero .est {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            letter-spacing: 6px;
-            margin: 1rem 0;
-            color: var(--gold);
-        }
-        .gold-divider-hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 1.8rem auto;
-        }
-        .gold-divider-hero .line {
-            width: 80px;
-            height: 1px;
-            background: var(--gold);
-        }
-        .gold-divider-hero i {
-            font-size: 1.4rem;
-            color: var(--gold);
-        }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      transition: color 0.25s;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .book-btn {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+      color: var(--gold);
+      transition: 0.25s;
+      cursor: pointer;
+    }
+    .book-btn:hover {
+      background: var(--gold);
+      color: #0c0b0a;
+    }
 
-        /* reveal on scroll animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.9s ease, transform 0.8s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* ---------- HERO ---------- */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 5.5rem;
+    }
+    .hero h1 {
+      font-size: 4.2rem;
+      color: var(--cream);
+      text-shadow: 2px 2px 0px rgba(197, 160, 89, 0.2);
+      letter-spacing: 6px;
+      line-height: 1.1;
+    }
+    .est {
+      font-family: var(--serif-heading);
+      font-size: 1.3rem;
+      letter-spacing: 7px;
+      margin: 1rem 0;
+      color: var(--gold);
+    }
 
-        /* Service Menu (newspaper / dotted vintage) */
-        .price-list {
-            background: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(2px);
-            padding: 2rem;
-            border-left: 3px solid var(--gold);
-            margin: 2rem 0;
-        }
-        .service-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            border-bottom: 1px dotted rgba(197, 160, 89, 0.5);
-            padding: 1rem 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-        }
-        .service-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .service-dots {
-            flex: 1;
-            border-bottom: 1px dotted var(--gold);
-            margin: 0 1rem;
-            height: 1em;
-        }
-        .service-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
+    .btn-gold {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      padding: 0.9rem 2.5rem;
+      font-family: var(--sans-body);
+      font-weight: 500;
+      letter-spacing: 2px;
+      transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+      cursor: pointer;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+      text-decoration: none;
+    }
+    .btn-gold:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+      box-shadow: 0 0 20px rgba(197,160,89,0.3);
+    }
 
-        /* Gallery Grid - enhanced with cool animations */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0 3rem;
-        }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 6px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            background: #0a0a0a;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            display: block;
-            filter: sepia(0.55) brightness(0.85) contrast(1.05);
-            transition: filter 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s ease-out;
-        }
-        /* COOL ANIMATION: scale + sepia removal + subtle glow */
-        .gallery-item:hover img {
-            filter: sepia(0) brightness(1.05) contrast(1.02);
-            transform: scale(1.05);
-        }
-        .gallery-item:hover {
-            border-color: var(--gold);
-            box-shadow: 0 20px 30px -8px rgba(197, 160, 89, 0.3);
-            transform: translateY(-6px);
-        }
-        /* Optional overlay caption animation */
-        .gallery-item::after {
-            content: "⟡ VIEW ⟡";
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            right: 0;
-            background: rgba(18, 18, 18, 0.85);
-            color: var(--gold);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-align: center;
-            padding: 8px;
-            backdrop-filter: blur(4px);
-            transition: bottom 0.3s ease-in-out;
-            pointer-events: none;
-            border-top: 1px solid var(--gold);
-        }
-        .gallery-item:hover::after {
-            bottom: 0;
-        }
+    /* ---------- STAGGERED REVEAL (sophisticated) ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px) scale(0.99);
+      transition: opacity 0.85s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.85s cubic-bezier(0.2, 0.9, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
-        /* footer */
-        .footer {
-            background: #0a0a0a;
-            padding: 3rem 2rem 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(197,160,89,0.4);
-            text-align: center;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-        }
-        .social-icons a {
-            color: var(--cream);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: var(--gold);
-        }
-        .repeat-est {
-            font-family: 'Rye', cursive;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: rgba(244,236,216,0.5);
-            margin-top: 1rem;
-            word-spacing: 6px;
-        }
+    /* Stagger children inside reveal (optional extra sophistication) */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition-delay: calc(0.08s * var(--i, 0));
+    }
+    .reveal-stagger.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        /* responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .container {
-                padding: 0 1.2rem;
-            }
-            .service-dots {
-                display: none;
-            }
-            .service-item {
-                flex-direction: column;
-                gap: 0.4rem;
-            }
-            .gallery-item img {
-                height: 260px;
-            }
-            .gallery-item::after {
-                font-size: 0.7rem;
-            }
-        }
-    </style>
+    /* price list */
+    .price-list {
+      background: rgba(12, 11, 10, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 2.5rem 2.2rem;
+      border-left: 4px solid var(--gold);
+      margin: 2.2rem 0;
+    }
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      border-bottom: 1px dotted rgba(197, 160, 89, 0.55);
+      padding: 1.2rem 0;
+      font-weight: 400;
+    }
+    .service-name {
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .service-price {
+      font-family: var(--serif-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    /* Gallery — images replaced by CSS placeholders with alt */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.2rem;
+      margin: 2.2rem 0 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      background: #0a0908;
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: var(--shadow-gold);
+      transition: transform 0.3s ease, border-color 0.3s;
+    }
+    .gallery-item:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+    }
+
+    /* PLACEHOLDER IMAGES (NO CDN) — pure CSS with gradient overlay, ready for assets */
+    .gallery-img {
+      width: 100%;
+      height: 320px;
+      background: linear-gradient(145deg, #1f1b16 0%, #2a231c 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: sepia(0.65) contrast(1.1) brightness(0.85);
+      transition: filter 0.5s, transform 0.5s;
+    }
+    .gallery-item:hover .gallery-img {
+      filter: sepia(0.1) contrast(1.05) brightness(1.05);
+      transform: scale(1.02);
+    }
+
+    /* Inline SVG icons inside placeholders (barber icon) */
+    .img-placeholder-svg {
+      width: 70px;
+      height: 70px;
+      opacity: 0.45;
+      color: var(--gold);
+    }
+    .img-alt-text {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--cream);
+      background: rgba(0,0,0,0.3);
+      padding: 5px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ornate dividers with inline SVG */
+    .victorian-scroll {
+      text-align: center;
+      margin: 2.5rem 0;
+    }
+
+    /* footer */
+    .footer {
+      background: #080706;
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(197,160,89,0.45);
+      text-align: center;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2rem 0;
+    }
+    .social-icons a {
+      color: var(--cream);
+      transition: color 0.25s;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      color: var(--gold);
+    }
+    /* inline svg icons */
+    .icon-svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .service-item {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
 </head>
-<body>
+<body id="top">
+  <!-- FRAME BUSTING + ANTI‑CLICKJACK (prevent iframe rendering) -->
+  <script>
+    (function() {
+      // frame busting: if in iframe, break out (and ensure html display)
+      if (window.top !== window.self) {
+        window.top.location = window.self.location;
+      }
+      // reveal the html (override display:none from style)
+      document.documentElement.style.display = 'block';
+    })();
+  </script>
 
-    <!-- Navigation Minimalist with Book Now CTA (now scrolls to contact) -->
-    <nav class="navbar">
-        <div class="logo">BARBER<span>SHOP</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#services">SERVICES</a></li>
-            <li><a href="#gallery">GALLERY</a></li>
-            <li><a href="#contact">VISIT</a></li>
-            <li><a href="#contact" class="book-btn" id="bookNowNavBtn">BOOK NOW</a></li>
-        </ul>
-    </nav>
+  <!-- GLASS NAVIGATION — semantic, ARIA -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="logo" aria-label="Vanguard Grooming">VANGUARD<span>GROOMING</span></div>
+    <ul class="nav-links" role="list">
+      <li role="listitem"><a href="#home" aria-current="location">HOME</a></li>
+      <li role="listitem"><a href="#services">SERVICES</a></li>
+      <li role="listitem"><a href="#gallery">GALLERY</a></li>
+      <li role="listitem"><a href="#contact">VISIT</a></li>
+      <li role="listitem"><a href="#contact" class="book-btn" id="bookNowNavBtn" rel="noopener">BOOK NOW</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero container reveal">
-            <div class="est">EST. 2025</div>
-            <h1>THE BARBERSHOP<br>OF REFINEMENT</h1>
-            <div class="gold-divider-hero">
-                <div class="line"></div>
-                <i class="fas fa-gem"></i>
-                <div class="line"></div>
-            </div>
-            <p style="max-width: 600px; margin: 1.5rem auto; font-weight: 300;">Traditional craftsmanship, modern luxury. Where sharp styles meet gentleman's legacy.</p>
-            <a href="#contact" class="btn-gold" id="heroBookBtn" style="text-decoration: none; display: inline-block;">RESERVE YOUR CHAIR</a>
-        </section>
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero container reveal" aria-label="Hero">
+      <div class="est">EST. 2018</div>
+      <h1>VANGUARD<br>GROOMING</h1>
+      <div style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0;">
+        <span style="width: 70px; height: 2px; background: var(--gold);"></span>
+        <!-- Inline SVG diamond -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 22,12 12,22 2,12" /></svg>
+        <span style="width: 70px; height: 2px; background: var(--gold);"></span>
+      </div>
+      <p style="max-width:600px; margin:1.5rem auto; font-weight:350;">Precision cuts. Vintage soul. Modern execution.</p>
+      <a href="#contact" class="btn-gold" id="heroBookBtn" rel="noopener">RESERVE YOUR CHAIR</a>
+    </section>
 
-        <!-- Victorian Flourish SVG Divider -->
-        <div class="victorian-scroll reveal">
-            <svg class="scroll-svg" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10,10 Q30,2 50,10 T90,10 T130,10 T170,10 T190,10" stroke="currentColor" fill="none"/>
-                <circle cx="100" cy="10" r="2.5" fill="#C5A059" stroke="none"/>
-                <path d="M20,12 L30,8 L40,12" stroke="currentColor" fill="none"/>
-                <path d="M160,12 L170,8 L180,12" stroke="currentColor" fill="none"/>
+    <!-- Victorian divider SVG (inline) -->
+    <div class="victorian-scroll reveal" aria-hidden="true">
+      <svg width="200" height="24" viewBox="0 0 200 24" fill="none" stroke="var(--gold)" stroke-width="1.2"><path d="M10,12 L30,6 L50,12 L70,6 L90,12 L110,12 L130,12 L150,6 L170,12 L190,6"/><circle cx="100" cy="12" r="3" fill="var(--gold)"/></svg>
+    </div>
+
+    <!-- SERVICES / PRICE LIST -->
+    <section id="services" class="container reveal" aria-labelledby="services-heading">
+      <h2 id="services-heading" class="serif-title" style="font-size: 2.6rem; text-align: center; color: var(--gold);">THE CUTTING ROOM</h2>
+      <div style="display:flex; justify-content:center; gap:1rem; margin:1.2rem 0;">
+        <span style="width:60px; height:1.5px; background:var(--gold);"></span>
+        <!-- scissors inline SVG -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" aria-hidden="true"><path d="M6 9L18 18M6 15L18 6" stroke-width="2"/><circle cx="6" cy="9" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        <span style="width:60px; height:1.5px; background:var(--gold);"></span>
+      </div>
+      <div class="price-list">
+        <div class="service-item"><span class="service-name">Signature Cut & Consultation</span><span class="service-price">$75</span></div>
+        <div class="service-item"><span class="service-name">Hot Towel Straight Razor Shave</span><span class="service-price">$55</span></div>
+        <div class="service-item"><span class="service-name">Beard Sculpt & Steam Ritual</span><span class="service-price">$48</span></div>
+        <div class="service-item"><span class="service-name">The Executive (Hair + Shave)</span><span class="service-price">$135</span></div>
+        <div class="service-item"><span class="service-name">Head Spa & Tonic Treatment</span><span class="service-price">$160</span></div>
+      </div>
+      <p style="text-align:center;"><span style="color:var(--gold);">✧</span> Complimentary whiskey or espresso <span style="color:var(--gold);">✧</span></p>
+    </section>
+
+    <!-- another scroll divider -->
+    <div class="victorian-scroll reveal" aria-hidden="true">
+      <svg width="220" height="20" viewBox="0 0 220 20" fill="none" stroke="var(--gold)"><path d="M15,10 L35,4 L55,10 L75,4 L95,10 L115,10 L135,10 L155,4 L175,10 L195,4 L215,10"/><circle cx="115" cy="10" r="3" fill="var(--gold)"/></svg>
+    </div>
+
+    <!-- GALLERY — PLACEHOLDERS WITH INLINE SVG (no external images) -->
+    <section id="gallery" class="container reveal" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" class="serif-title" style="font-size:2.2rem; text-align:center; color:var(--gold);">THE ATELIER</h2>
+      <div style="display:flex; justify-content:center; margin:1rem 0 1.8rem;">
+        <svg width="40" height="8" viewBox="0 0 40 8"><line x1="0" y1="4" x2="40" y2="4" stroke="var(--gold)" stroke-dasharray="2 4"/></svg>
+      </div>
+      <div class="gallery-grid">
+        <!-- item 1 -->
+        <div class="gallery-item">
+          <div class="gallery-img" role="img" aria-label="Barber precision cut with vintage tools">
+            <!-- inline SVG barber pole / scissors placeholder -->
+            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="8" y="8" width="24" height="24" rx="4" stroke="var(--gold)"/>
+              <circle cx="20" cy="20" r="6" stroke="var(--gold)"/>
+              <path d="M14 14 L26 26 M26 14 L14 26" stroke="var(--gold)"/>
             </svg>
+            <span class="img-alt-text">PRECISION CUT</span>
+          </div>
         </div>
-
-        <!-- Service Menu: vintage price list (newspaper style) -->
-        <section id="services" class="container reveal">
-            <div style="text-align: center;">
-                <h2 class="playfair" style="font-size: 2.5rem; letter-spacing: 2px; color: var(--gold);">THE CUTTING ROOM</h2>
-                <div class="ornate-divider">
-                    <div class="ornate-line"></div>
-                    <i class="fas fa-scissors ornate-icon"></i>
-                    <div class="ornate-line"></div>
-                </div>
-                <p style="margin-bottom: 1rem;">Traditional hot towel shaves & precision haircuts — tailored for the modern gentleman.</p>
-            </div>
-            <div class="price-list">
-                <div class="service-item">
-                    <span class="service-name">Signature Haircut & Consultation</span>
-                    <span class="service-dots"></span>
-                    <span class="service-price">$65</span>
-                </div>
-                <div class="service-item">
-                    <span class="service-name">Hot Towel Straight Razor Shave</span>
-                    <span class="service-dots"></span>
-                    <span class="service-price">$48</span>
-                </div>
-                <div class="service-item">
-                    <span class="service-name">Royal Beard Sculpt & Steam</span>
-                    <span class="service-dots"></span>
-                    <span class="service-price">$42</span>
-                </div>
-                <div class="service-item">
-                    <span class="service-name">The Executive (Hair + Shave + Facial)</span>
-                    <span class="service-dots"></span>
-                    <span class="service-price">$125</span>
-                </div>
-                <div class="service-item">
-                    <span class="service-name">Luxury Hot Towel & Head Spa</span>
-                    <span class="service-dots"></span>
-                    <span class="service-price">$150</span>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 1rem;">
-                <i class="fas fa-asterisk" style="color: var(--gold); font-size: 0.8rem;"></i> <span style="font-size: 0.8rem;">All services include a complimentary whiskey or espresso</span>
-            </div>
-        </section>
-
-        <!-- Ornate Divider (flourish) -->
-        <div class="victorian-scroll reveal">
-            <svg class="scroll-svg" viewBox="0 0 240 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15,10 L35,3 L55,10 L75,3 L95,10 L120,10 L145,10 L165,3 L185,10 L205,3 L225,10" stroke="currentColor" fill="none" stroke-width="1.2"/>
-                <circle cx="120" cy="10" r="3" fill="#C5A059" stroke="none"/>
+        <!-- item 2 -->
+        <div class="gallery-item">
+          <div class="gallery-img" role="img" aria-label="Leather barber chair and warm interior">
+            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="var(--gold)">
+              <path d="M12 28 L12 18 Q12 12 20 12 Q28 12 28 18 L28 28" stroke-width="1.5"/>
+              <rect x="10" y="28" width="20" height="6" stroke="var(--gold)"/>
             </svg>
+            <span class="img-alt-text">HERITAGE CHAIR</span>
+          </div>
         </div>
+        <!-- item 3 -->
+        <div class="gallery-item">
+          <div class="gallery-img" role="img" aria-label="Gentleman receiving luxury shave">
+            <svg class="img-placeholder-svg" viewBox="0 0 40 40" fill="none" stroke="var(--gold)">
+              <circle cx="20" cy="16" r="8" />
+              <path d="M16 24 L20 28 L24 24" />
+            </svg>
+            <span class="img-alt-text">HOT TOWEL RITUAL</span>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center; font-style:italic;">⟡ Hover to reveal richness — drop your own assets ⟡</p>
+    </section>
 
-        <!-- Gallery Grid with REAL PHOTOS + COOL ANIMATION (Sepia to color, scale, overlay slide) -->
-        <section id="gallery" class="container reveal">
-            <h2 class="playfair" style="font-size: 2rem; text-align: center; color: var(--gold);">THE ATELIER</h2>
-            <div class="ornate-divider">
-                <div class="ornate-line"></div>
-                <i class="fas fa-camera ornate-icon"></i>
-                <div class="ornate-line"></div>
-            </div>
-            <div class="gallery-grid">
-                <!-- Actual high-quality barbershop images (Unsplash / premium references) -->
-                <div class="gallery-item">
-                    <img src="https://images.pexels.com/photos/3998421/pexels-photo-3998421.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop" alt="Barber cutting hair with precision">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.pexels.com/photos/3998414/pexels-photo-3998414.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop" alt="Victorian barbershop interior leather chairs">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.pexels.com/photos/3998411/pexels-photo-3998411.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop" alt="Gentleman getting luxury haircut">
-                </div>
-            </div>
-            <p style="text-align: center; font-size: 0.85rem; margin-top: 0.5rem; font-style: italic;">⟡ Hover to reveal timeless details & rich colors ⟡</p>
-        </section>
+    <!-- FOOTER / CONTACT (Zero external, semantic) -->
+    <footer id="contact" class="footer" aria-label="Contact and location">
+      <div class="container reveal">
+        <h3 class="serif-title" style="font-size:2.2rem; color:var(--gold);">VANGUARD</h3>
+        <p>42 Savile Row, Mayfair, London</p>
+        <p>✆ +44 (0)20 7917 0022  |  book@vanguardgrooming.com</p>
+        <!-- Social icons with inline SVG (no font awesome) -->
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram" rel="noopener noreferrer">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" fill="none" stroke-width="1.5"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" fill="none"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="9" stroke="currentColor" fill="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" rel="noopener noreferrer">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H14C12 3 10 5 10 7V10H7V14H10V21H14V14H17L18 10H14V7C14 6.5 14.5 6 15 6H18V3Z" stroke="currentColor" fill="none"/></svg>
+          </a>
+        </div>
+        <p style="letter-spacing:4px; opacity:0.7;">EST. 2018 ✦ EST. 2018 ✦ EST. 2018</p>
+        <p style="margin-top:1.8rem; font-size:0.75rem;">© Vanguard Grooming — Traditional Craft, Uncompromising</p>
+      </div>
+    </footer>
+  </main>
 
-        <!-- Footer with location, socials, repeating ESTD motif (Contact Section) -->
-        <footer id="contact" class="footer">
-            <div class="container">
-                <div class="reveal">
-                    <h3 class="playfair" style="font-size: 1.8rem; color: var(--gold);">BARBERSHOP</h3>
-                    <p style="margin: 0.5rem 0;">42 Savile Row, Mayfair, London W1S 3PQ</p>
-                    <p style="margin: 0.2rem 0;">✆ +00 00000  |  ✉ samplebabershop.com</p>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="X / Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Yelp"><i class="fab fa-yelp"></i></a>
-                    </div>
-                    <div class="repeat-est">
-                        <span>ESTD 2025 ✦ ESTD 2025 ✦ ESTD 2025 ✦ ESTD 2025 ✦ ESTD 2025</span>
-                    </div>
-                    <p style="margin-top: 1.5rem; font-size: 0.7rem; opacity: 0.6;">© Barbershop — Traditional Craft, Modern Honor.</p>
-                </div>
-            </div>
-        </footer>
-    </main>
+  <!-- ZERO‑DEPENDENCY JAVASCRIPT: reveal + secure scroll, no innerHTML -->
+  <script>
+    (function(){
+      "use strict";
 
-    <!-- JavaScript: Scroll reveal animation + BOOK NOW now scrolls to contact (purely informational) -->
-    <script>
-        (function() {
-            // REVEAL ON SCROLL (Intersection Observer)
-            const revealElements = document.querySelectorAll('.reveal');
-            
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
-            
-            revealElements.forEach(el => {
-                revealObserver.observe(el);
-            });
-            
-            // ensure any element that might be visible at start gets active if already visible
-            window.addEventListener('load', () => {
-                revealElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 100) {
-                        el.classList.add('active');
-                    }
-                });
-            });
-            
-            // BOOK NOW BUTTON BEHAVIOR: smooth scroll to contact section (purely informational, no modal)
-            const bookNowNav = document.getElementById('bookNowNavBtn');
-            const heroBookBtn = document.getElementById('heroBookBtn');
-            
-            // Function to smoothly scroll to contact footer
-            function scrollToContact(event) {
-                // If the element is anchor link (heroBookBtn already uses href) prevent duplication
-                if (event && event.preventDefault && event.target && event.target.tagName !== 'A') {
-                    event.preventDefault();
-                }
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+      // --- SANITIZED REVEAL (Intersection Observer, no innerHTML)
+      const revealEls = document.querySelectorAll('.reveal');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // optional: add child stagger class if exists
+            if (entry.target.classList.contains('reveal-stagger')) {
+              // just in case, already handled by css
             }
-            
-            // For the navigation "BOOK NOW" button (which is an anchor with href="#contact" already, but we enhance)
-            if (bookNowNav) {
-                bookNowNav.addEventListener('click', function(e) {
-                    // already smooth scroll via CSS but ensure it's prevented double jump
-                    e.preventDefault();
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+
+      revealEls.forEach(el => observer.observe(el));
+
+      // Activate visible on load
+      window.addEventListener('load', () => {
+        revealEls.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 80) {
+            el.classList.add('active');
+          }
+        });
+      });
+
+      // --- SECURE SCROLL (Book Now, nav) - no innerHTML, using textContent if needed
+      function scrollToContact(e) {
+        if (e) e.preventDefault();
+        const contact = document.getElementById('contact');
+        if (contact) {
+          contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      const bookNav = document.getElementById('bookNowNavBtn');
+      const heroBook = document.getElementById('heroBookBtn');
+      if (bookNav) bookNav.addEventListener('click', scrollToContact);
+      if (heroBook) heroBook.addEventListener('click', scrollToContact);
+
+      // all nav links smooth (using textContent, no innerHTML)
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        if (link.id === 'bookNowNavBtn') return;
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (targetId === 'contact') {
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }
-            
-            // For Hero button: it's an anchor <a> already pointing to #contact, but we add smooth override
-            if (heroBookBtn) {
-                heroBookBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            }
-            
-            // Smooth anchor links for navigation menu items (HOME, SERVICES, GALLERY, VISIT)
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                // skip the book now because we already handled separately
-                if (link.id === 'bookNowNavBtn') return;
-                link.addEventListener('click', function(e) {
-                    const hash = this.getAttribute('href');
-                    if (hash && hash !== '#' && hash.startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = hash.substring(1);
-                        if (targetId === 'contact') {
-                            document.querySelector('.footer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        } else {
-                            const targetElem = document.getElementById(targetId);
-                            if (targetElem) {
-                                targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }
-                    } else if (hash === '#') {
-                        e.preventDefault();
-                    }
-                });
-            });
-            
-            // hover effect elegance on service items
-            const serviceItems = document.querySelectorAll('.service-item');
-            serviceItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    item.style.transition = 'all 0.2s';
-                    item.style.backgroundColor = 'rgba(197,160,89,0.05)';
-                });
-                item.addEventListener('mouseleave', () => {
-                    item.style.backgroundColor = 'transparent';
-                });
-            });
-            
-            // Additional subtle effect: add gentle animation to gallery items on load
-            console.log("Gilded Edge — informational luxury barbershop | Book Now scrolls to contact");
-        })();
-    </script>
+          }
+        });
+      });
+
+      // service item hover effect (safe)
+      document.querySelectorAll('.service-item').forEach(item => {
+        item.addEventListener('mouseenter', () => item.style.backgroundColor = 'rgba(197,160,89,0.06)');
+        item.addEventListener('mouseleave', () => item.style.backgroundColor = '');
+      });
+
+      // Security: enforce rel="noopener noreferrer" on external (none exist but safety)
+      document.querySelectorAll('a[target="_blank"]').forEach(a => {
+        a.setAttribute('rel', 'noopener noreferrer');
+      });
+
+      // additional ARIA / accessibility
+      document.querySelector('.navbar').setAttribute('aria-label', 'Main navigation');
+      
+      console.log('Vanguard Grooming — zero‑dependency, hardened.');
+    })();
+  </script>
+  <!-- ensure any remaining # links have rel (none) -->
 </body>
-  </html>
+    </html>

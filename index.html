@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   
   <!-- SECURITY: Strict Content Security Policy (self-contained) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
@@ -12,7 +12,11 @@
   
   <style>
     /* ---------- RESET & SYSTEM FONTS (Ultra-Premium Stacks) ---------- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
 
     :root {
       --charcoal: #090909;
@@ -30,6 +34,11 @@
       --ease-door: cubic-bezier(0.6, 0.04, 0.98, 0.335);
     }
 
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
     body {
       background-color: var(--charcoal);
       color: var(--cream);
@@ -39,13 +48,18 @@
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
+      width: 100%;
+      max-width: 100vw;
     }
 
     /* ---------- OBSESSIVE NOISE TEXTURE (Matte Black Paper) ---------- */
     body::before {
       content: "";
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
       background-repeat: repeat;
       pointer-events: none;
@@ -53,46 +67,72 @@
       opacity: 0.55;
       mix-blend-mode: overlay;
     }
-    /* Additional depth grain */
+    
     body::after {
       content: "";
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
       background: radial-gradient(circle at 20% 30%, rgba(10,10,10,0.3) 0%, transparent 70%);
       pointer-events: none;
       z-index: 998;
     }
 
-    ::selection { background: var(--gold-deep); color: #0a0a0a; }
-    html { scroll-behavior: smooth; }
+    ::selection { 
+      background: var(--gold-deep); 
+      color: #0a0a0a; 
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
 
-    /* ---------- CLAMP EVERYWHERE (Perfect Fit on any device) ---------- */
-    h1 { font-size: clamp(3rem, 10vw, 6.5rem); line-height: 1.1; }
-    h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); }
-    .serif-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: 1.5px; }
+    /* ---------- PERFECT FIT: CLAMP EVERYWHERE ---------- */
+    h1 { 
+      font-size: clamp(2.5rem, 12vw, 6.5rem); 
+      line-height: 1.1; 
+      word-break: break-word;
+    }
+    
+    h2 { 
+      font-size: clamp(1.8rem, 8vw, 4.2rem); 
+      word-break: break-word;
+    }
+    
+    .serif-display { 
+      font-family: var(--font-serif); 
+      font-weight: 700; 
+      letter-spacing: clamp(1px, 0.5vw, 2px);
+    }
 
     .container {
-      max-width: 1440px;
+      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
-      padding: 0 clamp(1.2rem, 5vw, 3rem);
+      padding: 0 clamp(12px, 4vw, 40px);
       position: relative;
       z-index: 5;
+      overflow-x: hidden;
     }
 
-    /* ---------- DYNAMIC GRID SYSTEM (1fr / minmax) ---------- */
+    /* ---------- DYNAMIC GRID SYSTEM (Perfect Fit) ---------- */
     .grid-dynamic {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: clamp(1.5rem, 4vw, 2.8rem);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: clamp(1rem, 3vw, 2.5rem);
+      width: 100%;
     }
 
-    /* ---------- GLASSMORPHISM NAVBAR (with metallic border) ---------- */
+    /* ---------- GLASSMORPHISM NAVBAR (Responsive) ---------- */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: clamp(1rem, 3vw, 1.8rem) clamp(1.2rem, 5vw, 3rem);
+      padding: clamp(0.8rem, 3vw, 1.5rem) clamp(12px, 4vw, 40px);
       flex-wrap: wrap;
+      gap: clamp(0.5rem, 2vw, 1rem);
       background: rgba(5, 5, 5, 0.7);
       backdrop-filter: blur(20px) saturate(200%);
       -webkit-backdrop-filter: blur(20px) saturate(200%);
@@ -101,15 +141,19 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      width: 100%;
     }
+    
     .logo {
       font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-size: clamp(1.4rem, 6vw, 2.2rem);
       font-weight: 700;
-      letter-spacing: 6px;
+      letter-spacing: clamp(3px, 1.5vw, 6px);
       color: var(--cream);
       text-transform: uppercase;
+      white-space: nowrap;
     }
+    
     .logo span { 
       background: var(--gold-metallic);
       -webkit-background-clip: text;
@@ -117,23 +161,32 @@
       color: transparent;
       font-weight: 800;
     }
+    
     .nav-links {
       display: flex;
-      gap: clamp(1.5rem, 4vw, 3rem);
+      gap: clamp(0.8rem, 3vw, 2.5rem);
       align-items: center;
       list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
+    
     .nav-links a {
       text-decoration: none;
       color: var(--cream);
       font-weight: 400;
-      font-size: clamp(0.8rem, 2vw, 0.95rem);
-      letter-spacing: 2.5px;
+      font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+      letter-spacing: clamp(1.5px, 0.8vw, 2.5px);
       transition: color 0.3s var(--ease-expensive);
       padding: 0.3rem 0;
       border-bottom: 1px solid transparent;
+      white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+    
+    .nav-links a:hover { 
+      color: var(--gold-light); 
+      border-bottom-color: var(--gold-light); 
+    }
 
     /* ---------- ULTRA-PREMIUM BOOK NOW BUTTON (Shimmer + Glint) ---------- */
     .btn-bespoke {
@@ -142,11 +195,11 @@
       border: 1px solid transparent;
       border-image: var(--border-metallic) 1;
       color: var(--cream);
-      padding: clamp(0.7rem, 2vw, 1rem) clamp(1.8rem, 4vw, 2.5rem);
+      padding: clamp(0.6rem, 2vw, 0.9rem) clamp(1.2rem, 4vw, 2.2rem);
       font-family: var(--font-sans);
       font-weight: 500;
-      letter-spacing: 4px;
-      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      letter-spacing: clamp(2px, 1vw, 4px);
+      font-size: clamp(0.65rem, 2.5vw, 0.85rem);
       transition: transform 0.4s var(--ease-expensive), box-shadow 0.5s var(--ease-expensive), border 0.2s;
       cursor: pointer;
       display: inline-block;
@@ -156,115 +209,155 @@
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
       will-change: transform;
+      white-space: nowrap;
     }
-    /* Shimmer animation */
+    
     .btn-bespoke::after {
       content: "";
       position: absolute;
-      top: -50%; left: -60%;
-      width: 200%; height: 200%;
+      top: -50%; 
+      left: -60%;
+      width: 200%; 
+      height: 200%;
       background: linear-gradient(115deg, transparent 20%, rgba(255, 245, 200, 0.15) 40%, transparent 60%);
       transform: rotate(25deg);
       animation: glint 6s infinite var(--ease-expensive);
       pointer-events: none;
     }
+    
     @keyframes glint {
       0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
       10% { opacity: 0.6; }
       20% { opacity: 0; }
       100% { transform: translateX(200%) rotate(25deg); opacity: 0; }
     }
+    
     .btn-bespoke:hover {
       transform: scale(1.03) translateY(-3px);
       box-shadow: 0 0 35px rgba(212, 175, 55, 0.25), 0 8px 20px rgba(0,0,0,0.6);
       border-image: var(--gold-metallic) 1;
     }
-    /* navigation version */
+    
     .book-btn {
       background: transparent;
       border: 1px solid transparent;
       border-image: var(--border-metallic) 1;
-      padding: 0.5rem 1.8rem;
+      padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.8rem);
       font-weight: 500;
-      letter-spacing: 2px;
+      letter-spacing: clamp(1.5px, 0.8vw, 2px);
+      font-size: clamp(0.65rem, 2.5vw, 0.85rem);
       transition: all 0.4s var(--ease-expensive);
       cursor: pointer;
       color: var(--cream);
+      white-space: nowrap;
     }
+    
     .book-btn:hover {
       background: rgba(212, 175, 55, 0.05);
       box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
       transform: scale(1.02);
     }
 
-    /* Hero */
+    /* Hero - Perfect Fit */
     .hero { 
       text-align: center; 
-      padding: clamp(4rem, 12vh, 8rem) 1rem clamp(3rem, 8vh, 6rem); 
+      padding: clamp(3rem, 10vh, 7rem) clamp(0.5rem, 3vw, 2rem) clamp(2.5rem, 8vh, 5rem);
+      width: 100%;
     }
+    
     .hero .est {
       font-family: var(--font-serif);
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      letter-spacing: 10px;
+      font-size: clamp(0.85rem, 3.5vw, 1.3rem);
+      letter-spacing: clamp(5px, 2vw, 10px);
       color: var(--gold-light);
     }
+    
     .gold-divider-hero {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 25px;
-      margin: clamp(1.5rem, 4vw, 2.5rem) auto;
+      gap: clamp(12px, 3vw, 25px);
+      margin: clamp(1.2rem, 3vw, 2.2rem) auto;
+      width: 100%;
     }
+    
     .gold-divider-hero .line { 
-      width: clamp(50px, 10vw, 100px); 
+      width: clamp(40px, 12vw, 100px); 
       height: 1px; 
       background: var(--border-metallic);
     }
 
-    /* Reveal + Stagger (expensive transitions) */
+    /* Reveal + Stagger */
     .reveal {
       opacity: 0;
       transform: translateY(50px);
       transition: opacity 0.9s var(--ease-expensive), transform 1s var(--ease-expensive);
     }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    
+    .reveal.active { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+    
     .stagger-item {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.7s var(--ease-expensive), transform 0.8s var(--ease-expensive);
     }
-    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    
+    .stagger-item.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
 
-    /* Price list (metallic touches) */
+    /* Price list - Perfect Fit */
     .price-list {
       background: rgba(5, 5, 5, 0.6);
       backdrop-filter: blur(8px);
-      padding: clamp(1.8rem, 4vw, 2.8rem);
+      padding: clamp(1.2rem, 3vw, 2.5rem);
       border-left: 4px solid;
       border-image: var(--gold-metallic) 1;
-      margin: 2rem 0;
+      margin: 1.5rem 0;
       box-shadow: 0 20px 30px -10px #000;
+      width: 100%;
     }
+    
     .service-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       border-bottom: 1px dotted rgba(212, 175, 55, 0.3);
-      padding: clamp(0.9rem, 2vw, 1.3rem) 0;
+      padding: clamp(0.7rem, 2vw, 1.2rem) 0;
+      gap: clamp(0.5rem, 2vw, 1rem);
     }
-    .service-name { font-size: clamp(1rem, 3vw, 1.3rem); font-weight: 500; letter-spacing: 1.5px; }
-    .service-dots { flex: 1; border-bottom: 1px dotted var(--gold-deep); margin: 0 1.8rem; height: 1em; }
+    
+    .service-name { 
+      font-size: clamp(0.9rem, 3.5vw, 1.25rem); 
+      font-weight: 500; 
+      letter-spacing: clamp(1px, 0.5vw, 1.5px);
+      flex-shrink: 0;
+    }
+    
+    .service-dots { 
+      flex: 1; 
+      border-bottom: 1px dotted var(--gold-deep); 
+      margin: 0 clamp(0.5rem, 2vw, 1.5rem); 
+      height: 1em;
+      min-width: 20px;
+    }
+    
     .service-price { 
       font-family: var(--font-serif); 
-      font-size: clamp(1.3rem, 3vw, 1.8rem); 
+      font-size: clamp(1.1rem, 4vw, 1.7rem); 
       font-weight: 600; 
       background: var(--gold-metallic);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      flex-shrink: 0;
     }
 
-    /* Gallery — glassmorphism placeholders with metallic edge */
+    /* Gallery - Perfect Fit */
     .gallery-item {
       position: relative;
       overflow: hidden;
@@ -275,89 +368,210 @@
       background: #13100b;
       aspect-ratio: 4 / 5;
       box-shadow: 0 20px 30px -12px black;
+      width: 100%;
     }
+    
     .gallery-img {
-      width: 100%; height: 100%;
+      width: 100%; 
+      height: 100%;
       display: block;
       background: radial-gradient(circle at 25% 30%, #3d3222, #0b0907);
       filter: sepia(0.7) contrast(1.15) brightness(0.75);
       transition: filter 0.8s var(--ease-expensive), transform 1s var(--ease-expensive);
     }
+    
     .gallery-item:hover .gallery-img {
       filter: sepia(0.1) contrast(1) brightness(1);
       transform: scale(1.06);
     }
+    
     .gallery-item:hover {
       border-image: var(--gold-metallic) 1;
       box-shadow: 0 30px 40px -10px rgba(212, 175, 55, 0.15);
       transform: translateY(-8px);
     }
+    
     .gallery-item::after {
       content: "⟡ ATELIER ⟡";
       position: absolute;
-      bottom: -50px; left: 0; right: 0;
+      bottom: -50px; 
+      left: 0; 
+      right: 0;
       background: rgba(5,5,5,0.8);
       backdrop-filter: blur(12px);
       color: var(--gold-light);
-      font-size: 0.8rem;
-      letter-spacing: 5px;
+      font-size: clamp(0.65rem, 2.5vw, 0.8rem);
+      letter-spacing: clamp(3px, 1.5vw, 5px);
       text-align: center;
-      padding: 12px;
+      padding: clamp(8px, 2vw, 12px);
       border-top: 1px solid transparent;
       border-image: var(--border-metallic) 1;
       transition: bottom 0.45s var(--ease-expensive);
       text-transform: uppercase;
     }
-    .gallery-item:hover::after { bottom: 0; }
+    
+    .gallery-item:hover::after { 
+      bottom: 0; 
+    }
 
-    /* Victorian SVG flourishes */
-    .victorian-scroll svg { width: clamp(160px, 30vw, 260px); fill: none; stroke: url(#goldGrad); stroke-width: 1.5; }
-    .victorian-scroll { text-align: center; margin: clamp(1rem, 3vw, 2rem) 0; }
+    /* Victorian SVG - Perfect Fit */
+    .victorian-scroll svg { 
+      width: clamp(140px, 35vw, 260px); 
+      fill: none; 
+      stroke: url(#goldGrad); 
+      stroke-width: 1.5;
+    }
+    
+    .victorian-scroll { 
+      text-align: center; 
+      margin: clamp(0.8rem, 2.5vw, 1.8rem) 0; 
+    }
 
-    /* Footer */
+    /* Footer - Perfect Fit */
     .footer {
       background: #030303;
-      padding: clamp(3rem, 8vh, 5rem) 2rem 2.5rem;
-      margin-top: 5rem;
+      padding: clamp(2.5rem, 6vh, 4.5rem) clamp(1rem, 4vw, 2.5rem) 2rem;
+      margin-top: clamp(3rem, 8vh, 5rem);
       border-top: 1px solid transparent;
       border-image: var(--border-metallic) 1;
       text-align: center;
+      width: 100%;
     }
+    
     .social-icons {
-      display: flex; justify-content: center; gap: clamp(2rem, 6vw, 3.5rem); margin: 2.5rem 0;
+      display: flex; 
+      justify-content: center; 
+      gap: clamp(1.5rem, 5vw, 3.5rem); 
+      margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+      flex-wrap: wrap;
     }
+    
     .social-icons a { 
       color: var(--cream); 
       transition: transform 0.4s var(--ease-expensive), color 0.3s; 
     }
-    .social-icons a:hover { color: var(--gold-light); transform: translateY(-5px) scale(1.05); }
+    
+    .social-icons a:hover { 
+      color: var(--gold-light); 
+      transform: translateY(-5px) scale(1.05); 
+    }
+    
     .repeat-est {
       font-family: var(--font-serif);
-      font-size: clamp(0.6rem, 2vw, 0.8rem);
-      letter-spacing: 6px;
+      font-size: clamp(0.55rem, 2.5vw, 0.8rem);
+      letter-spacing: clamp(3px, 1.5vw, 6px);
       color: rgba(239, 231, 213, 0.25);
-      word-spacing: 12px;
+      word-spacing: clamp(6px, 3vw, 12px);
     }
 
-    /* Responsive & perfect-fit adjustments */
+    /* Perfect Fit Responsive Adjustments */
     @media (max-width: 640px) {
-      .navbar { flex-direction: column; gap: 1rem; }
-      .nav-links { flex-wrap: wrap; justify-content: center; }
-      .service-dots { display: none; }
-      .service-item { flex-direction: column; gap: 0.2rem; }
+      .navbar { 
+        flex-direction: column; 
+        gap: 0.8rem;
+        padding: 0.8rem 12px;
+      }
+      
+      .nav-links { 
+        justify-content: center; 
+        width: 100%;
+        gap: 0.8rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+      }
+      
+      .service-dots { 
+        display: none; 
+      }
+      
+      .service-item { 
+        flex-direction: column; 
+        gap: 0.2rem;
+        align-items: flex-start;
+      }
+      
+      .service-name {
+        font-size: 1rem;
+      }
+      
+      .service-price {
+        align-self: flex-end;
+      }
+      
+      .logo {
+        font-size: 1.3rem;
+        white-space: nowrap;
+      }
+      
+      .btn-bespoke {
+        white-space: nowrap;
+        padding: 0.6rem 1.5rem;
+        font-size: 0.7rem;
+      }
+      
+      .hero p {
+        font-size: 0.85rem;
+        padding: 0 0.5rem;
+      }
     }
 
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; }
+    @media (max-width: 380px) {
+      .nav-links {
+        gap: 0.5rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
+      
+      .book-btn {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.6rem;
+      }
+      
+      .logo {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .hero .est {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+      }
+    }
+
+    /* Prevent horizontal scroll on all devices */
+    img, svg, video, canvas, iframe {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .sr-only { 
+      position: absolute; 
+      width: 1px; 
+      height: 1px; 
+      padding: 0; 
+      margin: -1px; 
+      overflow: hidden; 
+    }
   </style>
 </head>
 <body>
 
-<!-- FRAME BUSTING & DEFENSE (self-executing) -->
+<!-- FRAME BUSTING & DEFENSE -->
 <script>
   if (window.top !== window.self) { window.top.location = window.self.location; }
 </script>
 
-<!-- Navigation: glass, metallic border -->
+<!-- Navigation -->
 <nav class="navbar" aria-label="Main navigation">
   <div class="logo">VANGUARD<span>GROOMING</span></div>
   <ul class="nav-links" role="list">
@@ -370,7 +584,7 @@
 </nav>
 
 <main>
-  <!-- Hero Section with bespoke button -->
+  <!-- Hero Section -->
   <section id="home" class="hero container reveal">
     <div class="est">EST. 1892</div>
     <h1 class="serif-display">VANGUARD<br>OF REFINEMENT</h1>
@@ -382,11 +596,11 @@
       </svg>
       <div class="line"></div>
     </div>
-    <p style="max-width: 650px; margin: 1.5rem auto; font-weight: 300; font-size: clamp(0.9rem, 3vw, 1.1rem);">Where the straight razor meets legacy. Bespoke grooming for the modern gentleman.</p>
+    <p style="max-width: 650px; margin: 1.5rem auto; font-weight: 300; font-size: clamp(0.85rem, 3vw, 1.1rem);">Where the straight razor meets legacy. Bespoke grooming for the modern gentleman.</p>
     <a href="#contact" class="btn-bespoke" id="heroBookBtn" rel="noopener">RESERVE YOUR CHAIR</a>
   </section>
 
-  <!-- Victorian flourish with SVG gradient -->
+  <!-- Victorian flourish -->
   <div class="victorian-scroll reveal">
     <svg viewBox="0 0 240 24">
       <defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4AF37"/><stop offset="50%" stop-color="#F3E5AB"/><stop offset="100%" stop-color="#D4AF37"/></linearGradient></defs>
@@ -395,7 +609,7 @@
     </svg>
   </div>
 
-  <!-- Services (staggered items) -->
+  <!-- Services -->
   <section id="services" class="container reveal">
     <div style="text-align: center;">
       <h2 class="serif-display" style="background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent;">THE CUTTING ROOM</h2>
@@ -412,14 +626,14 @@
       <div class="service-item"><span class="service-name">The Vanguard (Cut + Shave)</span><span class="service-dots"></span><span class="service-price">$135</span></div>
       <div class="service-item"><span class="service-name">Head Spa & Ritual</span><span class="service-dots"></span><span class="service-price">$160</span></div>
     </div>
-    <p style="text-align:center; margin-top:1.5rem; letter-spacing:2px;">✢ COMPLIMENTARY WHISKEY OR ESPRESSO ✢</p>
+    <p style="text-align:center; margin-top:1.5rem; letter-spacing:2px; font-size: clamp(0.75rem, 2.5vw, 0.9rem);">✢ COMPLIMENTARY WHISKEY OR ESPRESSO ✢</p>
   </section>
 
   <div class="victorian-scroll reveal">
     <svg viewBox="0 0 260 24"><path d="M15,12 L30,6 L45,12 L60,6 L75,12 L90,6 L105,12 L120,12 L135,12 L150,6 L165,12 L180,6 L195,12 L210,6 L225,12 L240,6 L250,12" stroke="url(#goldGrad)" fill="none"/><circle cx="130" cy="12" r="3.5" fill="#D4AF37"/></svg>
   </div>
 
-  <!-- Gallery with dynamic grid -->
+  <!-- Gallery -->
   <section id="gallery" class="container reveal">
     <h2 class="serif-display" style="text-align: center; background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent;">THE ATELIER</h2>
     <div style="display:flex; justify-content:center; gap:1.5rem; margin:1.8rem 0;">
@@ -432,15 +646,15 @@
       <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Leather & brass — drop your asset"></div></div>
       <div class="gallery-item"><div class="gallery-img" role="img" aria-label="Gentleman ritual — replace with your image"></div></div>
     </div>
-    <p style="text-align:center; opacity:0.6; margin-top:1.2rem; letter-spacing:3px;">⟡ HOVER TO REVEAL · YOUR PHOTOGRAPHY HERE ⟡</p>
+    <p style="text-align:center; opacity:0.6; margin-top:1.2rem; letter-spacing:3px; font-size: clamp(0.7rem, 2.5vw, 0.85rem);">⟡ HOVER TO REVEAL · YOUR PHOTOGRAPHY HERE ⟡</p>
   </section>
 
-  <!-- Footer / Contact -->
+  <!-- Footer -->
   <footer id="contact" class="footer">
     <div class="container reveal">
-      <h3 class="serif-display" style="background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: clamp(2rem, 6vw, 3.2rem);">VANGUARD GROOMING</h3>
-      <p style="font-size: clamp(0.9rem, 2.5vw, 1.1rem);">42 Savile Row, Mayfair, London</p>
-      <p>✆ +44 20 7917 0000  |  ✉ chair@vanguardgrooming.com</p>
+      <h3 class="serif-display" style="background: var(--gold-metallic); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: clamp(1.8rem, 6vw, 3.2rem);">VANGUARD GROOMING</h3>
+      <p style="font-size: clamp(0.85rem, 2.5vw, 1.1rem);">42 Savile Row, Mayfair, London</p>
+      <p style="font-size: clamp(0.8rem, 2.5vw, 1rem);">✆ +44 20 7917 0000  |  ✉ chair@vanguardgrooming.com</p>
       <div class="social-icons">
         <a href="#" aria-label="Instagram" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a>
         <a href="#" aria-label="X" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4L20 20M20 4L4 20"/></svg></a>
@@ -455,11 +669,9 @@
 <script>
   (function(){
     "use strict";
-    // Self-executing anonymous function — hardened, no console.log, no innerHTML.
     
     if (window.top !== window.self) window.top.location = window.self.location;
 
-    // REVEAL + STAGGER (expensive transitions)
     const revealEls = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -473,7 +685,6 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
     revealEls.forEach(el => obs.observe(el));
 
-    // Mark service & gallery as stagger items
     document.querySelectorAll('.service-item, .gallery-item').forEach((item, idx) => {
       item.classList.add('stagger-item');
       item.style.transitionDelay = (idx * 0.04) + 's';
@@ -490,7 +701,6 @@
       });
     });
 
-    // BOOK NOW scroll logic (premium)
     function scrollToContact(e) { if(e) e.preventDefault(); document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'}); }
     document.getElementById('bookNowNavBtn')?.addEventListener('click', scrollToContact);
     document.getElementById('heroBookBtn')?.addEventListener('click', scrollToContact);
@@ -506,18 +716,13 @@
       });
     });
 
-    // Micro-interactions: metallic hover on service rows
     document.querySelectorAll('.service-item').forEach(row => {
       row.addEventListener('mouseenter', () => row.style.backgroundColor = 'rgba(212,175,55,0.05)');
       row.addEventListener('mouseleave', () => row.style.backgroundColor = '');
     });
 
-    // Security: enforce rel
     document.querySelectorAll('a').forEach(a => { if (a.hostname !== location.hostname) a.rel = 'noopener noreferrer'; });
   })();
 </script>
 
-<!-- Hidden gradient definitions for reusability (no external) -->
-<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4AF37"/><stop offset="50%" stop-color="#F3E5AB"/><stop offset="100%" stop-color="#D4AF37"/></linearGradient></defs></svg>
-</body>
-        </html>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4AF37"/><

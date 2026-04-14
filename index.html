@@ -17,6 +17,7 @@
     /* ============================================
        NOVA ATELIER - Ultra Smooth / Container-Free
        Zero Dependencies | Pure Content Flow
+       Option 7: Connecting Ribbon Threads Applied
     ============================================ */
 
     :root {
@@ -360,24 +361,117 @@
       letter-spacing: 0.2em;
     }
 
-    /* ----- SERVICES - Clean list, no cards ----- */
+    /* ===== SERVICES - Option 7: Connecting Ribbon Threads ===== */
     .services-list {
       display: flex;
       flex-direction: column;
-      gap: var(--space-xl);
+      gap: var(--space-lg);
+      position: relative;
     }
+
+    /* The connecting thread line that runs through all items */
+    .services-list::before {
+      content: '';
+      position: absolute;
+      left: 60px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--champagne-gold) 10%,
+        var(--champagne-gold) 90%,
+        transparent
+      );
+      opacity: 0.3;
+    }
+
     .service-entry {
       display: grid;
       grid-template-columns: 120px 1fr;
       gap: var(--space-lg);
+      position: relative;
     }
+
+    /* Connection circle at each entry point */
+    .service-entry::before {
+      content: '';
+      position: absolute;
+      left: 59px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: transparent;
+      border: 2px solid var(--champagne-gold);
+      border-radius: 50%;
+      z-index: 2;
+      opacity: 0.6;
+      transition: all var(--duration-fast);
+    }
+
+    /* Inner glowing dot */
+    .service-entry::after {
+      content: '';
+      position: absolute;
+      left: 59px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px;
+      height: 4px;
+      background: var(--champagne-gold);
+      border-radius: 50%;
+      z-index: 3;
+      box-shadow: 0 0 10px var(--champagne-gold);
+      transition: all var(--duration-fast);
+    }
+
+    /* Hover effect on the connection point */
+    .service-entry:hover::before {
+      opacity: 1;
+      width: 16px;
+      height: 16px;
+      left: 57px;
+      border-color: var(--champagne-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .service-entry:hover::after {
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 20px var(--champagne-gold);
+    }
+
+    /* Curved ribbon connectors between items */
+    .service-entry:not(:last-child) .service-number::after {
+      content: '';
+      position: absolute;
+      left: 60px;
+      top: calc(100% + 8px);
+      width: 30px;
+      height: calc(var(--space-lg) - 20px);
+      border-left: 1.5px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1.5px solid rgba(212, 175, 55, 0.2);
+      border-radius: 0 0 0 20px;
+      opacity: 0.4;
+    }
+
     .service-number {
       font-size: var(--text-lg);
       font-weight: 300;
       color: var(--champagne-gold);
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
       padding-bottom: var(--space-xs);
+      position: relative;
+      transition: all var(--duration-fast);
     }
+
+    .service-entry:hover .service-number {
+      color: var(--champagne-gold);
+      border-bottom-color: var(--champagne-gold);
+    }
+
     .service-info h3 {
       font-size: var(--text-md);
       font-weight: 400;
@@ -398,10 +492,15 @@
       font-size: var(--text-xs);
       color: var(--champagne-gold);
       opacity: 0.8;
+      position: relative;
+      transition: opacity var(--duration-fast);
     }
     .service-tags li::before {
       content: '—';
       margin-right: 8px;
+    }
+    .service-entry:hover .service-tags li {
+      opacity: 1;
     }
 
     /* ----- CONTACT - Clean form, minimal styling ----- */
@@ -551,7 +650,15 @@
       .home-description { margin: 0 auto var(--space-lg); }
       .home-cta { justify-content: center; }
       .home-visual { height: 300px; }
+      
+      /* Mobile ribbon adjustments */
+      .services-list::before { left: 20px; }
       .service-entry { grid-template-columns: 1fr; gap: var(--space-sm); }
+      .service-entry::before { left: 19px; }
+      .service-entry::after { left: 19px; }
+      .service-entry:not(:last-child) .service-number::after { left: 20px; }
+      .service-number { text-align: left; padding-left: 40px; }
+      
       .contact-grid { grid-template-columns: 1fr; }
       .footer-content { flex-direction: column; text-align: center; }
       .footer-meta { flex-direction: column; gap: var(--space-sm); }
@@ -642,7 +749,7 @@
       </div>
     </section>
 
-    <!-- SERVICES - Clean list, no cards -->
+    <!-- SERVICES - Option 7: Connecting Ribbon Threads -->
     <section id="services" class="section section-services">
       <div class="container">
         <div class="section-header reveal">
@@ -841,4 +948,4 @@
     })();
   </script>
 </body>
-</html>
+                                                           </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Luxury Tech Studio - Where Elegance Meets Innovation">
+  <meta name="description" content="Sample Website - Where Elegance Meets Innovation">
   <meta name="theme-color" content="#1A1F3C">
   
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
@@ -11,18 +11,20 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
-  <title>NOVA ATELIER | Luxury Tech Studio</title>
+  <title>SAMPLE WEBSITE | Luxury Tech Studio</title>
   
   <style>
     /* ============================================
-       NOVA ATELIER - Interactive Ribbon Threads
-       Zero Dependencies | Pure Content Flow
-       Option 7: Connecting Ribbon Threads with Interactive Circles
+       SAMPLE WEBSITE - Negative Space Cutouts
+       Zero Dependencies | Atmospheric Depth Zones
+       Option 9: Background Tonality Shifts
     ============================================ */
 
     :root {
       --navy-deep: #1A1F3C;
       --navy-dark: #131832;
+      --navy-darker: #0E1228;
+      --navy-lighter: #1E2345;
       --champagne-gold: #D4AF37;
       --white-soft: rgba(255, 255, 255, 0.95);
       --white-muted: rgba(255, 255, 255, 0.7);
@@ -57,7 +59,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, var(--navy-deep) 0%, #101428 100%);
+      background: var(--navy-deep);
       color: var(--white-soft);
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       font-weight: 300;
@@ -66,14 +68,84 @@
       overflow-x: hidden;
     }
 
-    /* Simple fixed background - no animations */
+    /* Base background gradient */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
       pointer-events: none;
-      z-index: -1;
+      z-index: -2;
+    }
+
+    /* Negative Space Cutouts - Atmospheric zones through background shifts */
+    .section {
+      position: relative;
+    }
+
+    /* Home section - slightly darker base zone */
+    .section-home {
+      background: linear-gradient(135deg, var(--navy-darker) 0%, var(--navy-dark) 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* About section - lighter atmospheric zone */
+    .section-about {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #161B36 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Services section - darker zone with subtle gold undertone */
+    .section-services {
+      background: linear-gradient(135deg, #101428 0%, var(--navy-darker) 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Contact section - lighter elevated zone */
+    .section-contact {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #1A1E3A 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Subtle transition overlays between zones */
+    .section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.15));
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .section-home::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Content blocks get subtle background lift without borders */
+    .service-entry {
+      position: relative;
+      padding: var(--space-md) 0;
+      transition: background 0.3s var(--ease-out);
+    }
+
+    /* Individual items have micro-lift on hover */
+    .service-entry:hover {
+      background: rgba(212, 175, 55, 0.02);
     }
 
     .skip-link {
@@ -94,6 +166,8 @@
       margin: 0 auto;
       padding: 0 var(--container-padding);
       width: 100%;
+      position: relative;
+      z-index: 3;
     }
 
     /* ----- HEADER - Simple Glass ----- */
@@ -348,6 +422,9 @@
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
+      padding: var(--space-md);
+      background: rgba(26, 31, 60, 0.15);
+      border-radius: 2px;
     }
     .story-text {
       font-size: var(--text-base);
@@ -361,31 +438,12 @@
       letter-spacing: 0.2em;
     }
 
-    /* ===== SERVICES - Interactive Ribbon Threads with Moving Circles ===== */
+    /* ===== SERVICES - Negative Space Cutouts ===== */
     .services-list {
       display: flex;
       flex-direction: column;
-      gap: var(--space-lg);
+      gap: 0;
       position: relative;
-    }
-
-    /* The connecting thread line that runs through all items */
-    .services-list::before {
-      content: '';
-      position: absolute;
-      left: 60px;
-      top: 40px;
-      bottom: 40px;
-      width: 2px;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--champagne-gold) 10%,
-        var(--champagne-gold) 90%,
-        transparent
-      );
-      opacity: 0.3;
-      transition: opacity var(--duration-base);
     }
 
     .service-entry {
@@ -393,109 +451,45 @@
       grid-template-columns: 120px 1fr;
       gap: var(--space-lg);
       position: relative;
+      padding: var(--space-md) var(--space-sm);
+      transition: background 0.3s var(--ease-out);
+      border-radius: 4px;
     }
 
-    /* Interactive Circle Container */
-    .service-circle-container {
-      position: absolute;
-      left: 60px;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      z-index: 10;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Atmospheric depth through alternating subtle backgrounds */
+    .service-entry:nth-child(odd) {
+      background: rgba(26, 31, 60, 0.2);
     }
 
-    /* Connection circle at each entry point */
-    .service-circle {
-      width: 14px;
-      height: 14px;
-      background: transparent;
-      border: 2px solid var(--champagne-gold);
-      border-radius: 50%;
-      position: relative;
-      transition: all 0.4s var(--ease-out);
-      opacity: 0.7;
+    .service-entry:nth-child(even) {
+      background: rgba(20, 25, 50, 0.15);
     }
 
-    /* Inner glowing dot */
-    .service-circle::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 4px;
-      height: 4px;
-      background: var(--champagne-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--champagne-gold);
-      transition: all 0.4s var(--ease-out);
-    }
-
-    /* Active/Expanded Circle State */
-    .service-entry.active .service-circle {
-      width: 30px;
-      height: 30px;
-      opacity: 1;
-      border-width: 3px;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-    }
-
-    .service-entry.active .service-circle::after {
-      width: 8px;
-      height: 8px;
-      box-shadow: 0 0 20px var(--champagne-gold), 0 0 40px var(--champagne-gold);
-    }
-
-    /* Curved ribbon connectors between items */
-    .service-entry:not(:last-child) .service-number::after {
-      content: '';
-      position: absolute;
-      left: 60px;
-      top: calc(100% + 8px);
-      width: 30px;
-      height: calc(var(--space-lg) - 20px);
-      border-left: 1.5px solid rgba(212, 175, 55, 0.2);
-      border-bottom: 1.5px solid rgba(212, 175, 55, 0.2);
-      border-radius: 0 0 0 20px;
-      opacity: 0.4;
-      transition: opacity var(--duration-base);
-    }
-
-    .service-entry.active:not(:last-child) .service-number::after {
-      opacity: 0.8;
-      border-left-color: var(--champagne-gold);
-      border-bottom-color: var(--champagne-gold);
+    .service-entry:hover {
+      background: rgba(212, 175, 55, 0.04);
     }
 
     .service-number {
       font-size: var(--text-lg);
       font-weight: 300;
       color: var(--champagne-gold);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
       padding-bottom: var(--space-xs);
       position: relative;
-      transition: all 0.4s var(--ease-out);
+      transition: all var(--duration-fast);
+      opacity: 0.8;
     }
 
-    .service-entry.active .service-number {
-      color: var(--champagne-gold);
-      border-bottom-color: var(--champagne-gold);
-      transform: translateX(8px);
+    .service-entry:hover .service-number {
+      opacity: 1;
+      transform: translateX(4px);
     }
 
-    /* Text content that follows the circle */
     .service-info {
-      transition: transform 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+      transition: transform 0.3s var(--ease-out);
     }
 
-    .service-entry.active .service-info {
-      transform: translateX(12px);
+    .service-entry:hover .service-info {
+      transform: translateX(6px);
     }
 
     .service-info h3 {
@@ -505,7 +499,7 @@
       transition: color 0.3s;
     }
 
-    .service-entry.active .service-info h3 {
+    .service-entry:hover .service-info h3 {
       color: var(--champagne-gold);
     }
 
@@ -513,11 +507,6 @@
       font-size: var(--text-sm);
       color: var(--white-muted);
       margin-bottom: var(--space-sm);
-      transition: color 0.3s;
-    }
-
-    .service-entry.active .service-info p {
-      color: var(--white-soft);
     }
 
     .service-tags {
@@ -540,16 +529,8 @@
       margin-right: 8px;
     }
 
-    .service-entry.active .service-tags li {
+    .service-entry:hover .service-tags li {
       opacity: 1;
-      transform: translateX(4px);
-    }
-
-    /* Hover effect fallback */
-    .service-circle-container:hover .service-circle {
-      opacity: 1;
-      width: 18px;
-      height: 18px;
     }
 
     /* ----- CONTACT - Clean form, minimal styling ----- */
@@ -558,6 +539,13 @@
       grid-template-columns: 1fr 1fr;
       gap: var(--space-xl);
     }
+
+    .contact-info {
+      padding: var(--space-md);
+      background: rgba(26, 31, 60, 0.15);
+      border-radius: 4px;
+    }
+
     .contact-heading {
       font-size: var(--text-md);
       font-weight: 400;
@@ -583,6 +571,12 @@
     .detail-value {
       font-size: var(--text-base);
       color: var(--white-soft);
+    }
+
+    .contact-form-wrapper {
+      padding: var(--space-md);
+      background: rgba(26, 31, 60, 0.15);
+      border-radius: 4px;
     }
 
     .contact-form {
@@ -624,14 +618,25 @@
       padding: var(--space-md);
       text-align: center;
       color: var(--champagne-gold);
-      border: 1px solid var(--champagne-gold);
-      border-radius: 40px;
+      background: rgba(26, 31, 60, 0.2);
+      border-radius: 4px;
     }
 
     /* ----- FOOTER ----- */
     .footer {
       padding: var(--space-lg) 0;
-      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      background: var(--navy-darker);
+      position: relative;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--champagne-gold), transparent);
+      opacity: 0.2;
     }
     .footer-content {
       display: flex;
@@ -700,12 +705,8 @@
       .home-cta { justify-content: center; }
       .home-visual { height: 300px; }
       
-      /* Mobile ribbon adjustments */
-      .services-list::before { left: 20px; }
       .service-entry { grid-template-columns: 1fr; gap: var(--space-sm); }
-      .service-circle-container { left: 20px; }
-      .service-entry:not(:last-child) .service-number::after { left: 20px; }
-      .service-number { text-align: left; padding-left: 40px; }
+      .service-number { text-align: left; }
       
       .contact-grid { grid-template-columns: 1fr; }
       .footer-content { flex-direction: column; text-align: center; }
@@ -721,8 +722,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; }
       .service-info,
-      .service-number,
-      .service-circle {
+      .service-number {
         transition: none;
       }
     }
@@ -738,8 +738,8 @@
           <span class="logo-interlock"></span>
           <span class="logo-interlock"></span>
         </div>
-        <span class="logo-text">NOVA</span>
-        <span class="logo-accent">ATELIER</span>
+        <span class="logo-text">SAMPLE</span>
+        <span class="logo-accent">WEBSITE</span>
       </div>
       
       <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
@@ -787,7 +787,7 @@
       </div>
     </section>
 
-    <!-- ABOUT - Plain text only, no containers -->
+    <!-- ABOUT - Negative space cutout zone -->
     <section id="about" class="section section-about">
       <div class="container">
         <div class="section-header reveal">
@@ -796,13 +796,13 @@
         </div>
         
         <div class="about-text reveal" data-delay="200">
-          <p class="story-text">NOVA ATELIER emerged from a singular vision: to merge haute couture sensibilities with bulletproof engineering. Every pixel is intentional. Security is our foundation. We don't build websites—we craft secure, immersive sanctuaries for your brand.</p>
+          <p class="story-text">SAMPLE WEBSITE emerged from a singular vision: to merge haute couture sensibilities with bulletproof engineering. Every pixel is intentional. Security is our foundation. We don't build websites—we craft secure, immersive sanctuaries for your brand.</p>
           <div class="story-signature">— The Atelier</div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES - Interactive Ribbon Threads with Moving Circles -->
+    <!-- SERVICES - Negative Space Cutouts with alternating backgrounds -->
     <section id="services" class="section section-services">
       <div class="container">
         <div class="section-header reveal">
@@ -811,10 +811,7 @@
         </div>
         
         <div class="services-list">
-          <div class="service-entry" data-service="1">
-            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Strategic Architecture details">
-              <div class="service-circle"></div>
-            </div>
+          <div class="service-entry reveal" data-delay="100">
             <div class="service-number">01</div>
             <div class="service-info">
               <h3>Strategic Architecture</h3>
@@ -827,10 +824,7 @@
             </div>
           </div>
           
-          <div class="service-entry" data-service="2">
-            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Immersive Interfaces details">
-              <div class="service-circle"></div>
-            </div>
+          <div class="service-entry reveal" data-delay="200">
             <div class="service-number">02</div>
             <div class="service-info">
               <h3>Immersive Interfaces</h3>
@@ -843,10 +837,7 @@
             </div>
           </div>
           
-          <div class="service-entry" data-service="3">
-            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Performance Alchemy details">
-              <div class="service-circle"></div>
-            </div>
+          <div class="service-entry reveal" data-delay="300">
             <div class="service-number">03</div>
             <div class="service-info">
               <h3>Performance Alchemy</h3>
@@ -862,7 +853,7 @@
       </div>
     </section>
 
-    <!-- CONTACT - Clean form, no heavy containers -->
+    <!-- CONTACT - Negative space zone -->
     <section id="contact" class="section section-contact">
       <div class="container">
         <div class="section-header reveal">
@@ -878,7 +869,7 @@
             <div class="contact-details">
               <div class="detail-item">
                 <span class="detail-label">Correspondence</span>
-                <span class="detail-value">atelier@nova.studio</span>
+                <span class="detail-value">atelier@sample.website</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">Studio</span>
@@ -891,24 +882,8 @@
             </div>
           </div>
           
-          <div class="contact-form-wrapper reveal" data-delay="200">
-            <form id="secure-contact-form" class="contact-form">
+          
               <div class="form-group">
-                <label for="name" class="form-label">Designation</label>
-                <input type="text" id="name" name="name" class="form-input" placeholder="Your name" autocomplete="name">
-              </div>
-              
-              <div class="form-group">
-                <label for="email" class="form-label">Courier Address</label>
-                <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" autocomplete="email">
-              </div>
-              
-              <div class="form-group">
-                <label for="message" class="form-label">Your Vision</label>
-                <textarea id="message" name="message" class="form-input" rows="4" placeholder="Tell us about your project..."></textarea>
-              </div>
-              
-              <button type="submit" class="btn btn-primary btn-full">Send Encrypted Inquiry</button>
               
               <p class="form-note">All transmissions are protected. We never share your data.</p>
             </form>
@@ -921,8 +896,8 @@
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
-        <span class="logo-text">NOVA</span>
-        <span class="logo-accent">ATELIER</span>
+        <span class="logo-text">SAMPLE</span>
+        <span class="logo-accent">WEBSITE</span>
       </div>
       <div class="footer-meta">
         <p class="copyright"></p>
@@ -956,69 +931,6 @@
           menu.classList.remove('active');
           document.body.style.overflow = '';
         }));
-      }
-
-      // Interactive Service Circles - Click/Tap to expand and move text
-      function initServiceCircles() {
-        const serviceEntries = DOM.getAll('.service-entry');
-        
-        serviceEntries.forEach(entry => {
-          const circleContainer = entry.querySelector('.service-circle-container');
-          
-          if (circleContainer) {
-            // Click/tap handler
-            circleContainer.addEventListener('click', (e) => {
-              e.stopPropagation();
-              
-              // Toggle active class
-              entry.classList.toggle('active');
-              
-              // Update ARIA expanded state
-              const isExpanded = entry.classList.contains('active');
-              circleContainer.setAttribute('aria-expanded', isExpanded);
-            });
-            
-            // Keyboard support (Enter/Space)
-            circleContainer.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                entry.classList.toggle('active');
-                const isExpanded = entry.classList.contains('active');
-                circleContainer.setAttribute('aria-expanded', isExpanded);
-              }
-            });
-            
-            // Initialize ARIA attributes
-            circleContainer.setAttribute('aria-expanded', 'false');
-          }
-        });
-        
-        // Close others when one is opened (optional accordion behavior)
-        // Uncomment for accordion style:
-        /*
-        serviceEntries.forEach(entry => {
-          const circleContainer = entry.querySelector('.service-circle-container');
-          if (circleContainer) {
-            circleContainer.addEventListener('click', (e) => {
-              e.stopPropagation();
-              const isActive = entry.classList.contains('active');
-              
-              // Close all others
-              serviceEntries.forEach(other => {
-                if (other !== entry) {
-                  other.classList.remove('active');
-                  const otherContainer = other.querySelector('.service-circle-container');
-                  if (otherContainer) otherContainer.setAttribute('aria-expanded', 'false');
-                }
-              });
-              
-              // Toggle current
-              entry.classList.toggle('active', !isActive);
-              circleContainer.setAttribute('aria-expanded', !isActive);
-            });
-          }
-        });
-        */
       }
 
       // Scroll reveal
@@ -1060,10 +972,7 @@
 
       // Copyright year
       const yearEl = DOM.get('.copyright');
-      if (yearEl) DOM.setText(yearEl, `© ${new Date().getFullYear()} NOVA ATELIER. Crafted with precision.`);
-
-      // Initialize service circles
-      initServiceCircles();
+      if (yearEl) DOM.setText(yearEl, `© ${new Date().getFullYear()} SAMPLE WEBSITE. Crafted with precision.`);
 
       // Resize handler
       window.addEventListener('resize', () => {
@@ -1076,4 +985,4 @@
     })();
   </script>
 </body>
-            </html>
+  </html>

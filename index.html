@@ -629,69 +629,189 @@
       50% { opacity: 1; transform: scaleY(1); }
     }
 
-    /* ----- About Section ----- */
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-md);
+    /* ===== ABOUT SECTION - INTERLOCKING RIBBON SHOWCASE (REPLACED CARDS) ===== */
+    .about-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
       margin-bottom: var(--space-xl);
     }
 
-    /* Glass Cards */
-    .glass-card {
+    .showcase-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-lg);
+      position: relative;
+    }
+
+    .showcase-item.reverse {
+      grid-template-columns: 1fr 120px;
+    }
+
+    .showcase-item.reverse .showcase-marker {
+      order: 2;
+      text-align: right;
+    }
+
+    .showcase-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .marker-icon {
+      width: 70px;
+      height: 70px;
+      position: relative;
+    }
+
+    .interlock-pair {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .interlock-1, .interlock-2 {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border: 2px solid var(--champagne-gold);
+      background: rgba(212, 175, 55, 0.08);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+      transition: all var(--duration-base) var(--ease-out-expo);
+    }
+
+    .interlock-1 {
+      top: 0;
+      left: 0;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      animation: interlockPulse1 4s infinite alternate ease-in-out;
+    }
+
+    .interlock-2 {
+      bottom: 0;
+      right: 0;
+      border-radius: 40% 60% 70% 30% / 30% 70% 40% 60%;
+      border-color: var(--white-muted);
+      animation: interlockPulse2 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes interlockPulse1 {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-3px, 3px) rotate(5deg); }
+    }
+
+    @keyframes interlockPulse2 {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(3px, -3px) rotate(-5deg); }
+    }
+
+    .marker-label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--champagne-gold);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .showcase-item.reverse .marker-label {
+      writing-mode: vertical-rl;
+      transform: rotate(0deg);
+    }
+
+    .showcase-content {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
-      border-radius: 40px;
-      padding: var(--space-lg) var(--space-md);
-      box-shadow: var(--shadow-md);
-      transition: transform var(--duration-base), box-shadow var(--duration-base);
+      border-radius: 0 60px 60px 60px;
+      padding: var(--space-lg);
       position: relative;
-      overflow: hidden;
+      transition: all var(--duration-base) var(--ease-out-expo);
+      box-shadow: var(--shadow-md);
     }
 
-    .glass-card::before {
+    .showcase-item.reverse .showcase-content {
+      border-radius: 60px 0 60px 60px;
+    }
+
+    .showcase-content::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(145deg, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+      border-radius: inherit;
       pointer-events: none;
     }
 
-    .glass-card:hover {
-      transform: translateY(-8px);
+    .showcase-content::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 40px;
+      height: 40px;
+      border-top: 2px solid var(--champagne-gold);
+      border-left: 2px solid var(--champagne-gold);
+      border-radius: 0 0 20px 0;
+      opacity: 0.4;
+    }
+
+    .showcase-item.reverse .showcase-content::after {
+      left: auto;
+      right: -1px;
+      border-left: none;
+      border-right: 2px solid var(--champagne-gold);
+      border-radius: 0 0 0 20px;
+    }
+
+    .showcase-content:hover {
+      transform: translateY(-6px);
       box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 175, 55, 0.1);
-      border-color: rgba(212, 175, 55, 0.3);
+      border-color: rgba(212, 175, 55, 0.25);
     }
 
-    .card-icon {
-      margin-bottom: var(--space-md);
-    }
-
-    .icon-shape {
-      width: 50px;
-      height: 50px;
-      border: 1.5px solid var(--champagne-gold);
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      background: rgba(212, 175, 55, 0.08);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-    }
-
-    .card-title {
+    .showcase-title {
       font-size: var(--text-md);
       font-weight: 400;
       margin-bottom: var(--space-sm);
       color: var(--white-soft);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
     }
 
-    .card-text {
+    .title-accent {
+      width: 30px;
+      height: 1px;
+      background: var(--champagne-gold);
+      opacity: 0.6;
+    }
+
+    .showcase-text {
       font-size: var(--text-sm);
       color: var(--white-muted);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
-    /* Glass Panel */
+    .showcase-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: var(--space-md);
+    }
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--champagne-gold);
+      border-radius: 50%;
+      margin: 0 2px;
+      opacity: 0.4;
+    }
+
+    /* Glass Panel (About Story - Unchanged) */
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
@@ -722,7 +842,7 @@
       letter-spacing: 0.2em;
     }
 
-    /* ----- Services Section ----- */
+    /* ----- Services Section (Unchanged) ----- */
     .services-showcase {
       display: flex;
       flex-direction: column;
@@ -772,6 +892,34 @@
       padding: var(--space-md) var(--space-lg);
     }
 
+    /* Glass Cards (For Services - Unchanged) */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: var(--space-lg) var(--space-md);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--duration-base), box-shadow var(--duration-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 175, 55, 0.1);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
     .service-title {
       font-size: var(--text-md);
       font-weight: 400;
@@ -800,7 +948,7 @@
       color: var(--white-muted);
     }
 
-    /* ----- Contact Section ----- */
+    /* ----- Contact Section (Unchanged) ----- */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -919,7 +1067,7 @@
       margin-top: var(--space-sm);
     }
 
-    /* ----- Footer ----- */
+    /* ----- Footer (Unchanged) ----- */
     .footer {
       padding: var(--space-lg) 0;
       border-top: 1px solid var(--glass-border);
@@ -1077,8 +1225,36 @@
         height: 350px;
       }
       
-      .about-grid {
+      /* About Showcase Mobile */
+      .showcase-item,
+      .showcase-item.reverse {
         grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+      
+      .showcase-marker {
+        flex-direction: row;
+        justify-content: center;
+      }
+      
+      .marker-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+      
+      .showcase-item.reverse .marker-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+      
+      .showcase-item.reverse .showcase-marker {
+        order: -1;
+        text-align: center;
+      }
+      
+      .showcase-content,
+      .showcase-item.reverse .showcase-content {
+        border-radius: 40px;
       }
       
       .service-item,
@@ -1142,6 +1318,16 @@
       .geo-3 {
         width: 100px;
         height: 100px;
+      }
+      
+      .marker-icon {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .interlock-1, .interlock-2 {
+        width: 35px;
+        height: 35px;
       }
     }
 
@@ -1274,7 +1460,7 @@
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section - WITH INTERLOCKING RIBBON SHOWCASE (REPLACED CARDS) -->
     <section id="about" class="section section-about">
       <div class="container">
         <div class="section-header reveal" data-reveal="up">
@@ -1282,32 +1468,82 @@
           <h2 class="section-title">Elevating the <span class="gold">Extraordinary</span></h2>
         </div>
         
-        <div class="about-grid">
-          <div class="about-card glass-card reveal" data-reveal="right" data-delay="100">
-            <div class="card-icon">
-              <div class="icon-shape"></div>
+        <!-- NEW: Interlocking Ribbon Showcase -->
+        <div class="about-showcase">
+          <div class="showcase-item reveal" data-reveal="right" data-delay="100">
+            <div class="showcase-marker">
+              <div class="marker-icon">
+                <div class="interlock-pair">
+                  <span class="interlock-1"></span>
+                  <span class="interlock-2"></span>
+                </div>
+              </div>
+              <span class="marker-label">CRAFT</span>
             </div>
-            <h3 class="card-title">Bespoke Craft</h3>
-            <p class="card-text">Every pixel is intentional. We sculpt digital experiences with the precision of fine artisanship, rejecting templated mediocrity.</p>
+            <div class="showcase-content">
+              <h3 class="showcase-title">
+                Bespoke Craft
+                <span class="title-accent"></span>
+              </h3>
+              <p class="showcase-text">Every pixel is intentional. We sculpt digital experiences with the precision of fine artisanship, rejecting templated mediocrity. Our work is hand-crafted, layer by layer, until perfection emerges.</p>
+              <div class="showcase-footer">
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+              </div>
+            </div>
           </div>
           
-          <div class="about-card glass-card reveal" data-reveal="up" data-delay="200">
-            <div class="card-icon">
-              <div class="icon-shape"></div>
+          <div class="showcase-item reverse reveal" data-reveal="left" data-delay="200">
+            <div class="showcase-marker">
+              <div class="marker-icon">
+                <div class="interlock-pair">
+                  <span class="interlock-1"></span>
+                  <span class="interlock-2"></span>
+                </div>
+              </div>
+              <span class="marker-label">TRUST</span>
             </div>
-            <h3 class="card-title">Fortified Trust</h3>
-            <p class="card-text">Security is our foundation. Zero third-party dependencies, hardened CSP policies, and an unwavering commitment to client data protection.</p>
+            <div class="showcase-content">
+              <h3 class="showcase-title">
+                Fortified Trust
+                <span class="title-accent"></span>
+              </h3>
+              <p class="showcase-text">Security is our foundation. Zero third-party dependencies, hardened CSP policies, and an unwavering commitment to client data protection. Your digital sanctuary remains impenetrable.</p>
+              <div class="showcase-footer">
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+              </div>
+            </div>
           </div>
           
-          <div class="about-card glass-card reveal" data-reveal="left" data-delay="300">
-            <div class="card-icon">
-              <div class="icon-shape"></div>
+          <div class="showcase-item reveal" data-reveal="right" data-delay="300">
+            <div class="showcase-marker">
+              <div class="marker-icon">
+                <div class="interlock-pair">
+                  <span class="interlock-1"></span>
+                  <span class="interlock-2"></span>
+                </div>
+              </div>
+              <span class="marker-label">MOTION</span>
             </div>
-            <h3 class="card-title">Timeless Motion</h3>
-            <p class="card-text">Subtle, intentional animations that breathe life into interfaces without overwhelming. Elegance in every transition.</p>
+            <div class="showcase-content">
+              <h3 class="showcase-title">
+                Timeless Motion
+                <span class="title-accent"></span>
+              </h3>
+              <p class="showcase-text">Subtle, intentional animations that breathe life into interfaces without overwhelming. Elegance in every transition—where movement becomes poetry and interaction feels inevitable.</p>
+              <div class="showcase-footer">
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+              </div>
+            </div>
           </div>
         </div>
         
+        <!-- About Story Panel (Unchanged) -->
         <div class="about-story glass-panel reveal" data-reveal="fade" data-delay="400">
           <div class="story-content">
             <p class="story-text">NOVA ATELIER emerged from a singular vision: to merge haute couture sensibilities with bulletproof engineering. We don't build websites—we craft secure, immersive sanctuaries for your brand.</p>

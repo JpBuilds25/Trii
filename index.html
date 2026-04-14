@@ -15,9 +15,9 @@
   
   <style>
     /* ============================================
-       NOVA ATELIER - Ultra Smooth / Container-Free
+       NOVA ATELIER - Interactive Ribbon Threads
        Zero Dependencies | Pure Content Flow
-       Option 7: Connecting Ribbon Threads Applied
+       Option 7: Connecting Ribbon Threads with Interactive Circles
     ============================================ */
 
     :root {
@@ -361,7 +361,7 @@
       letter-spacing: 0.2em;
     }
 
-    /* ===== SERVICES - Option 7: Connecting Ribbon Threads ===== */
+    /* ===== SERVICES - Interactive Ribbon Threads with Moving Circles ===== */
     .services-list {
       display: flex;
       flex-direction: column;
@@ -385,6 +385,7 @@
         transparent
       );
       opacity: 0.3;
+      transition: opacity var(--duration-base);
     }
 
     .service-entry {
@@ -394,53 +395,61 @@
       position: relative;
     }
 
-    /* Connection circle at each entry point */
-    .service-entry::before {
-      content: '';
+    /* Interactive Circle Container */
+    .service-circle-container {
       position: absolute;
-      left: 59px;
+      left: 60px;
       top: 50%;
-      transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      z-index: 10;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Connection circle at each entry point */
+    .service-circle {
+      width: 14px;
+      height: 14px;
       background: transparent;
       border: 2px solid var(--champagne-gold);
       border-radius: 50%;
-      z-index: 2;
-      opacity: 0.6;
-      transition: all var(--duration-fast);
+      position: relative;
+      transition: all 0.4s var(--ease-out);
+      opacity: 0.7;
     }
 
     /* Inner glowing dot */
-    .service-entry::after {
+    .service-circle::after {
       content: '';
       position: absolute;
-      left: 59px;
       top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       width: 4px;
       height: 4px;
       background: var(--champagne-gold);
       border-radius: 50%;
-      z-index: 3;
       box-shadow: 0 0 10px var(--champagne-gold);
-      transition: all var(--duration-fast);
+      transition: all 0.4s var(--ease-out);
     }
 
-    /* Hover effect on the connection point */
-    .service-entry:hover::before {
+    /* Active/Expanded Circle State */
+    .service-entry.active .service-circle {
+      width: 30px;
+      height: 30px;
       opacity: 1;
-      width: 16px;
-      height: 16px;
-      left: 57px;
-      border-color: var(--champagne-gold);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      border-width: 3px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
     }
 
-    .service-entry:hover::after {
-      width: 6px;
-      height: 6px;
-      box-shadow: 0 0 20px var(--champagne-gold);
+    .service-entry.active .service-circle::after {
+      width: 8px;
+      height: 8px;
+      box-shadow: 0 0 20px var(--champagne-gold), 0 0 40px var(--champagne-gold);
     }
 
     /* Curved ribbon connectors between items */
@@ -455,6 +464,13 @@
       border-bottom: 1.5px solid rgba(212, 175, 55, 0.2);
       border-radius: 0 0 0 20px;
       opacity: 0.4;
+      transition: opacity var(--duration-base);
+    }
+
+    .service-entry.active:not(:last-child) .service-number::after {
+      opacity: 0.8;
+      border-left-color: var(--champagne-gold);
+      border-bottom-color: var(--champagne-gold);
     }
 
     .service-number {
@@ -464,43 +480,76 @@
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
       padding-bottom: var(--space-xs);
       position: relative;
-      transition: all var(--duration-fast);
+      transition: all 0.4s var(--ease-out);
     }
 
-    .service-entry:hover .service-number {
+    .service-entry.active .service-number {
       color: var(--champagne-gold);
       border-bottom-color: var(--champagne-gold);
+      transform: translateX(8px);
+    }
+
+    /* Text content that follows the circle */
+    .service-info {
+      transition: transform 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+    }
+
+    .service-entry.active .service-info {
+      transform: translateX(12px);
     }
 
     .service-info h3 {
       font-size: var(--text-md);
       font-weight: 400;
       margin-bottom: var(--space-xs);
+      transition: color 0.3s;
     }
+
+    .service-entry.active .service-info h3 {
+      color: var(--champagne-gold);
+    }
+
     .service-info p {
       font-size: var(--text-sm);
       color: var(--white-muted);
       margin-bottom: var(--space-sm);
+      transition: color 0.3s;
     }
+
+    .service-entry.active .service-info p {
+      color: var(--white-soft);
+    }
+
     .service-tags {
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-sm);
       list-style: none;
     }
+
     .service-tags li {
       font-size: var(--text-xs);
       color: var(--champagne-gold);
-      opacity: 0.8;
+      opacity: 0.7;
       position: relative;
-      transition: opacity var(--duration-fast);
+      transition: all 0.3s;
     }
+
     .service-tags li::before {
       content: '—';
       margin-right: 8px;
     }
-    .service-entry:hover .service-tags li {
+
+    .service-entry.active .service-tags li {
       opacity: 1;
+      transform: translateX(4px);
+    }
+
+    /* Hover effect fallback */
+    .service-circle-container:hover .service-circle {
+      opacity: 1;
+      width: 18px;
+      height: 18px;
     }
 
     /* ----- CONTACT - Clean form, minimal styling ----- */
@@ -654,8 +703,7 @@
       /* Mobile ribbon adjustments */
       .services-list::before { left: 20px; }
       .service-entry { grid-template-columns: 1fr; gap: var(--space-sm); }
-      .service-entry::before { left: 19px; }
-      .service-entry::after { left: 19px; }
+      .service-circle-container { left: 20px; }
       .service-entry:not(:last-child) .service-number::after { left: 20px; }
       .service-number { text-align: left; padding-left: 40px; }
       
@@ -672,6 +720,11 @@
 
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; }
+      .service-info,
+      .service-number,
+      .service-circle {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -749,7 +802,7 @@
       </div>
     </section>
 
-    <!-- SERVICES - Option 7: Connecting Ribbon Threads -->
+    <!-- SERVICES - Interactive Ribbon Threads with Moving Circles -->
     <section id="services" class="section section-services">
       <div class="container">
         <div class="section-header reveal">
@@ -758,7 +811,10 @@
         </div>
         
         <div class="services-list">
-          <div class="service-entry reveal" data-delay="100">
+          <div class="service-entry" data-service="1">
+            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Strategic Architecture details">
+              <div class="service-circle"></div>
+            </div>
             <div class="service-number">01</div>
             <div class="service-info">
               <h3>Strategic Architecture</h3>
@@ -771,7 +827,10 @@
             </div>
           </div>
           
-          <div class="service-entry reveal" data-delay="200">
+          <div class="service-entry" data-service="2">
+            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Immersive Interfaces details">
+              <div class="service-circle"></div>
+            </div>
             <div class="service-number">02</div>
             <div class="service-info">
               <h3>Immersive Interfaces</h3>
@@ -784,7 +843,10 @@
             </div>
           </div>
           
-          <div class="service-entry reveal" data-delay="300">
+          <div class="service-entry" data-service="3">
+            <div class="service-circle-container" role="button" tabindex="0" aria-label="Expand Performance Alchemy details">
+              <div class="service-circle"></div>
+            </div>
             <div class="service-number">03</div>
             <div class="service-info">
               <h3>Performance Alchemy</h3>
@@ -896,6 +958,69 @@
         }));
       }
 
+      // Interactive Service Circles - Click/Tap to expand and move text
+      function initServiceCircles() {
+        const serviceEntries = DOM.getAll('.service-entry');
+        
+        serviceEntries.forEach(entry => {
+          const circleContainer = entry.querySelector('.service-circle-container');
+          
+          if (circleContainer) {
+            // Click/tap handler
+            circleContainer.addEventListener('click', (e) => {
+              e.stopPropagation();
+              
+              // Toggle active class
+              entry.classList.toggle('active');
+              
+              // Update ARIA expanded state
+              const isExpanded = entry.classList.contains('active');
+              circleContainer.setAttribute('aria-expanded', isExpanded);
+            });
+            
+            // Keyboard support (Enter/Space)
+            circleContainer.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                entry.classList.toggle('active');
+                const isExpanded = entry.classList.contains('active');
+                circleContainer.setAttribute('aria-expanded', isExpanded);
+              }
+            });
+            
+            // Initialize ARIA attributes
+            circleContainer.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        // Close others when one is opened (optional accordion behavior)
+        // Uncomment for accordion style:
+        /*
+        serviceEntries.forEach(entry => {
+          const circleContainer = entry.querySelector('.service-circle-container');
+          if (circleContainer) {
+            circleContainer.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const isActive = entry.classList.contains('active');
+              
+              // Close all others
+              serviceEntries.forEach(other => {
+                if (other !== entry) {
+                  other.classList.remove('active');
+                  const otherContainer = other.querySelector('.service-circle-container');
+                  if (otherContainer) otherContainer.setAttribute('aria-expanded', 'false');
+                }
+              });
+              
+              // Toggle current
+              entry.classList.toggle('active', !isActive);
+              circleContainer.setAttribute('aria-expanded', !isActive);
+            });
+          }
+        });
+        */
+      }
+
       // Scroll reveal
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
@@ -937,6 +1062,9 @@
       const yearEl = DOM.get('.copyright');
       if (yearEl) DOM.setText(yearEl, `© ${new Date().getFullYear()} NOVA ATELIER. Crafted with precision.`);
 
+      // Initialize service circles
+      initServiceCircles();
+
       // Resize handler
       window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && menu && menu.classList.contains('active')) {
@@ -948,4 +1076,4 @@
     })();
   </script>
 </body>
-                                                           </html>
+            </html>
